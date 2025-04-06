@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up / Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .google-btn {
+            background-color: #4285F4;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            padding: 12px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .google-btn:hover {
+            background-color: #357AE8;
+        }
+
+        .google-icon {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Sign Up</h2>
+
+        <!-- Sign Up Form -->
+        <div class="form-container">
+            <input type="email" id="signupEmail" placeholder="Email" required />
+            <input type="password" id="signupPassword" placeholder="Password" required />
+            <button id="btn1">Sign Up</button>
+            <a href="login.html">login</a>
+        </div>
+
+        <!-- Google Sign-In Button -->
+        <div class="google-btn" id="googleBtn">
+            <span class="google-icon">&#9733;</span> Sign Up with Google
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+       
+        const firebaseConfig = {
+            apiKey: "AIzaSyAedJTjKGzpLIAiGGIMQ95cCgS5PhnqgXU",
+            authDomain: "regi-48730.firebaseapp.com",
+            projectId: "regi-48730",
+            storageBucket: "regi-48730.firebasestorage.app",
+            messagingSenderId: "740494806021",
+            appId: "1:740494806021:web:eead9969344e5038e1e06c"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Sign Up with Email and Password
+        const btn1 = document.getElementById("btn1");
+        btn1.addEventListener("click", func);
+
+        function func() {
+            const email = document.getElementById("signupEmail").value;
+            const password = document.getElementById("signupPassword").value;
+            console.log(email, password);
+
+            createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log(user);
+                alert("Sign up successful!");
+                window.location.href = "login.html"; // Redirect to login page 
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(error);
+                alert("Sign up failed: " + errorMessage);
+            });
+        }
+
+        // Google Sign-In Functionality
+        const googleBtn = document.getElementById("googleBtn");
+
+        googleBtn.addEventListener("click", function () {
+            const provider = new GoogleAuthProvider();
+
+            signInWithPopup(auth, provider)
+            .then((result) => {
+                const user = result.user;
+                console.log(user);
+                alert("Google Sign-In successful!");
+                window.location.href = "main.html"; // Redirect to main page after Google login
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(error);
+                alert("Google Sign-In failed: " + errorMessage);
+            });
+        });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .alert {
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #f44336;
+            color: white;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Login</h2>
+
+        <!-- Login Form -->
+        <input type="email" id="loginEmail" placeholder="Email" required />
+        <input type="password" id="loginPassword" placeholder="Password" required />
+        <button id="btn3" onclick="func3()">Login</button>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+       
+        const firebaseConfig = {
+          apiKey: "AIzaSyAedJTjKGzpLIAiGGIMQ95cCgS5PhnqgXU",
+          authDomain: "regi-48730.firebaseapp.com",
+          projectId: "regi-48730",
+          storageBucket: "regi-48730.firebasestorage.app",
+          messagingSenderId: "740494806021",
+          appId: "1:740494806021:web:eead9969344e5038e1e06c"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app)
+
+        let btn3 = document.getElementById("btn3").addEventListener("click", func3);
+
+        function func3() {
+            const login = document.getElementById("loginEmail").value;
+            const loginPassword = document.getElementById("loginPassword").value;
+            console.log(login, loginPassword);
+            
+            signInWithEmailAndPassword(auth, login, loginPassword)
+            .then((userCredential) => {
+                // Logged in 
+                const user = userCredential.user;
+                console.log(user);
+                
+                alert("Login successful!");
+                window.location.href = "index.html";  // Redirect to main page after successful login
+            })
+            .catch((error) => {
+                alert("Login failed");
+            });
+        }
+    </script>  
+
+</body>
+</html>

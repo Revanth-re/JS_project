@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        /* General page styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #5c6bc0;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #5c6bc0;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #3f4a99;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 15px;
+            color: #5c6bc0;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Register</h2>
+        <input type="email" id="signupEmail" placeholder="Email" required />
+        <input type="password" id="signupPassword" placeholder="Password" required />
+        <button id="btn1">Sign Up</button>
+        <a href="Adminlogin.html">Already have an account? Login</a>
+    </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyAQdxzBsX6lYBmOC77tJWk9fGhN301-a7M",
+          authDomain: "admincredentials.firebaseapp.com",
+          projectId: "admincredentials",
+          storageBucket: "admincredentials.firebasestorage.app",
+          messagingSenderId: "589725712079",
+          appId: "1:589725712079:web:59bd0a95769ecf759301ba"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const btn1 = document.getElementById("btn1");
+        btn1.addEventListener("click", func);
+
+        function func() {
+            const email = document.getElementById("signupEmail").value;
+            const password = document.getElementById("signupPassword").value;
+            console.log(email, password);
+
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    console.log(user);
+
+                    // Store the user's UID in localStorage
+                    localStorage.setItem('uid', user.uid);
+
+                    alert("Sign up successful!");
+                    window.location.href = "Adminlogin.html"; // Redirect to login page 
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log(error);
+                    alert("Sign up failed: " + errorMessage);
+                });
+        }
+    </script>
+</body>
+</html>

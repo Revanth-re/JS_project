@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Services</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            font-size: 1rem;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: #333;
+            padding: 1rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .logo a {
+            text-decoration: none;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links li {
+            margin: 0;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.5rem;
+            transition: background-color 0.3s;
+        }
+
+        .nav-links a:hover {
+            background-color: #575757;
+            border-radius: 0.5rem;
+        }
+
+        /* Hamburger menu (for mobile screens) */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 30px;
+            height: 4px;
+            background-color: white;
+            transition: transform 0.3s;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background-color: #333;
+                width: 200px;
+                height: 100vh;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-evenly;
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active div:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active div:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+        }
+
+        /* Product Cards */
+        .product-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .product-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .product-card h3 {
+            margin-top: 10px;
+            font-size: 1.3rem;
+            color: #333;
+        }
+
+        .product-card p {
+            margin: 10px 0;
+            color: #555;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="provide_serv.html">MyLogo</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </nav>
+
+    <!-- Product Cards -->
+    <h1 style="text-align:center; margin-top: 2rem;">Your Services</h1>
+    <div class="product-cards" id="productCardsContainer">
+        <!-- JavaScript will generate cards here -->
+    </div>
+
+    <script>
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById("hamburger");
+        const navLinks = document.querySelector(".nav-links");
+
+        hamburger.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+            hamburger.classList.toggle("active");
+        });
+
+        // Get data from localStorage
+        let data = JSON.parse(localStorage.getItem("Caters")) || [];
+        console.log(data);
+
+        let container = document.getElementById("productCardsContainer");
+
+        // Loop through data and create cards dynamically
+        data.forEach((val) => {
+            let card = document.createElement("div");
+            card.classList.add("product-card");
+
+            let img = document.createElement("img");
+            img.src = val.image;
+            img.alt = val.name;
+
+            let title = document.createElement("h3");
+            title.innerText = val.name;
+
+            let description = document.createElement("p");
+            description.innerText = `Description: ${val.description}`;
+
+            let stock = document.createElement("p");
+            stock.innerText = `Stock: ${val.stock}`;
+
+            let category = document.createElement("p");
+            category.innerText = `Category: ${val.category}`;
+
+            card.append(img, title, description, stock, category);
+            container.append(card);
+        });
+    </script>
+
+</body>
+</html>

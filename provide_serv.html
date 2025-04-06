@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Form</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 2rem;
+            font-size: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 1rem 2rem;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;  /* Set navbar to relative to help position the hamburger */
+        }
+
+        .logo a {
+            color: white;
+            font-size: 2rem;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin: 0 1rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: #575757;
+            border-radius: 0.5rem;
+        }
+
+        /* Hamburger Icon */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 4px;
+            width: 30px;
+            height: 25px;
+            position: absolute;  /* Position the hamburger icon on the top right */
+            right: 1rem;
+            top: 1rem;
+        }
+
+        .hamburger div {
+            background-color: white;
+            height: 4px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        /* Layout for smaller screens */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                display: none;
+                width: 100%;
+                margin-top: 1rem;
+                padding: 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 1rem 0;
+                text-align: center;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+
+        /* Layout for larger screens */
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+
+            .hamburger {
+                display: none;
+            }
+        }
+
+        /* Input Fields Styling */
+        input {
+            width: 50vw;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 50VW;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Error message */
+        .error-message {
+            color: red;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Center the content */
+        .form-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">MyLogo</a>
+            </div>
+
+            <!-- Hamburger Icon for Small Screens -->
+            <div class="hamburger" id="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+
+            <!-- Navbar Links -->
+            <ul class="nav-links">
+                <li><a href="your_services.html">Your-posts</a></li>
+                <li><a href="#">Payments</a></li>
+                <li><a href="#">Discounts</a></li>
+                <li><a href="#">Help</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Form Content -->
+        <input type="text" placeholder="Enter product name" id="inpProductName"> <br>
+        <input type="text" placeholder="Enter product description" id="inpProductDesc"> <br>
+        <input type="number" placeholder="Enter product price" id="inpProductPrice"> <br>
+        <input type="text" placeholder="Enter product category" id="inpProductCategory"> <br>
+        <input type="number" placeholder="Enter stock quantity" id="inpStockQuantity"> <br>
+        <input type="url" placeholder="Enter product image URL" id="inpProductImage"> <br>
+        <button id="btnAddProduct">Add Product</button> <br>
+
+        <input type="text" placeholder="Enter product name to update" id="inpSearchName"> <br>
+        <input type="text" placeholder="Enter new product description" id="inpNewProductDesc"> <br>
+        <input type="number" placeholder="Enter new product price" id="inpNewProductPrice"> <br>
+        <button id="btnUpdateProduct">Update Product</button> <br>
+
+        <input type="text" placeholder="Enter product name to delete" id="inpDeleteName"> <br>
+        <button id="btnDeleteProduct">Delete Product</button> <br>
+    </header>
+
+    <script type="module">
+        // JavaScript for the Hamburger Menu toggle
+        const hamburger = document.getElementById("hamburger");
+        const navLinks = document.querySelector(".nav-links");
+
+        hamburger.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+        });
+let arr=JSON.parse(localStorage.getItem("Caters"))||[];
+        // Firebase functionality
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+        import { getFirestore, addDoc, collection, updateDoc, doc, getDocs, query, where, deleteDoc, orderBy, limit } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCV1eiwKVZs1inaWkVTYVsisI3sIIlAGL0",
+            authDomain: "crud-dd0b4.firebaseapp.com",
+            projectId: "crud-dd0b4",
+            storageBucket: "crud-dd0b4.firebasestorage.app",
+            messagingSenderId: "818921146981",
+            appId: "1:818921146981:web:dbbdba5635bcdf78d3548c"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const currentAdminEmail = "admin@example.com";  // Replace with current admin's email
+
+        // Add Product functionality
+        let btnAddProduct = document.getElementById("btnAddProduct");
+        btnAddProduct.addEventListener("click", async function() {
+            let productName = document.getElementById("inpProductName").value;
+            let productDesc = document.getElementById("inpProductDesc").value;
+            let productPrice = document.getElementById("inpProductPrice").value;
+            let productCategory = document.getElementById("inpProductCategory").value;
+            let stockQuantity = document.getElementById("inpStockQuantity").value;
+            let productImage = document.getElementById("inpProductImage").value;
+
+            if (!productName || !productDesc || !productPrice || !productCategory || !stockQuantity || !productImage) {
+                alert("All fields must be filled.");
+                return;
+            }
+
+            try {
+                const docRef = await addDoc(collection(db, "productsList"), {
+                    name: productName,
+                    description: productDesc,
+                    price: productPrice,
+                    category: productCategory,
+                    stock: stockQuantity,
+                    image: productImage,
+                    adminEmail: currentAdminEmail
+                });
+                alert("Product added successfully!");
+            } catch (e) {
+                alert("Error adding product.");
+            }
+            let obj={name:productName,
+    age:productDesc,
+    class:productPrice,
+    category: productCategory,
+    stock: stockQuantity,
+    image: productImage,
+    adminEmail: currentAdminEmail
+
+}
+
+arr.push(obj)
+console.log(arr);
+ localStorage.setItem("Caters",JSON.stringify(arr));
+        });
+
+        // Update Product functionality
+        let btnUpdateProduct = document.getElementById("btnUpdateProduct");
+        btnUpdateProduct.addEventListener("click", async function() {
+            let searchName = document.getElementById("inpSearchName").value;
+            let newProductDesc = document.getElementById("inpNewProductDesc").value;
+            let newProductPrice = document.getElementById("inpNewProductPrice").value;
+
+            if (!searchName) {
+                alert("Please enter a product name to update.");
+                return;
+            }
+
+            if (!newProductDesc || !newProductPrice) {
+                alert("All fields must be filled for the update.");
+                return;
+            }
+
+            try {
+                const q = query(collection(db, "productsList"), where("name", "==", searchName), where("adminEmail", "==", currentAdminEmail));
+                const querySnapshot = await getDocs(q);
+
+                if (querySnapshot.empty) {
+                    alert("No product found with that name.");
+                    return;
+                }
+
+                querySnapshot.forEach(async (doc) => {
+                    const productDocRef = doc.ref;
+                    await updateDoc(productDocRef, {
+                        description: newProductDesc,
+                        price: newProductPrice
+                    });
+                });
+
+                alert("Product updated successfully!");
+            } catch (e) {
+                alert("Error updating product.");
+            }
+        });
+
+        // Delete Product functionality
+        let btnDeleteProduct = document.getElementById("btnDeleteProduct");
+        btnDeleteProduct.addEventListener("click", async function() {
+            let deleteName = document.getElementById("inpDeleteName").value;
+
+            if (!deleteName) {
+                alert("Please enter a product name to delete.");
+                return;
+            }
+
+            try {
+                const q = query(collection(db, "productsList"), where("name", "==", deleteName), where("adminEmail", "==", currentAdminEmail));
+                const querySnapshot = await getDocs(q);
+
+                if (querySnapshot.empty) {
+                    alert("No product found with that name.");
+                    return;
+                }
+
+                querySnapshot.forEach(async (doc) => {
+                    const productDocRef = doc.ref;
+                    await deleteDoc(productDocRef);
+                });
+
+                alert("Product deleted successfully!");
+            } catch (e) {
+                alert("Error deleting product.");
+            }
+        });
+
+    </script>
+</body>
+</html>

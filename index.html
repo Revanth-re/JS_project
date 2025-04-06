@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body and Layout */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(255, 255, 255);
+        }
+
+        header {
+            background-color: #333;
+            padding: 10px 0;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            gap: 5px;
+        }
+
+        .navbar .logo a {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 10px 15px;
+        }
+
+        .nav-links li a:hover {
+            background-color: #575757;
+            border-radius: 4px;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 21px;
+            width: 30px;
+        }
+
+        .hamburger .bar {
+            height: 3px;
+            background-color: white;
+            width: 100%;
+            border-radius: 3px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: #333;
+                flex-direction: column;
+                align-items: center;
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+
+        /* Other Styles */
+        .search {
+            display: flex;
+            justify-content: center;
+            background-color: rgb(77, 75, 72);
+            padding: 3%;
+            gap: 10px;
+            margin: 3%;
+        }
+
+        .search input {
+            padding: 1%;
+            width: 30vw;
+        }
+
+        .search button {
+            width: 10vw;
+            background-color: #ff1919;
+        }
+
+        /* Product List */
+        #productList {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 250px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .product-card h3 {
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .product-card p {
+            color: #555;
+            font-size: 1em;
+            margin: 5px 0;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar">
+            <div class="logo" id="logo">
+                <a href="#">MyWebsite</a>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="adminRegister.html">Provide-service</a></li>
+                <li><a href="#">Reports</a></li>
+                <li><a href="#">Refer&earn</a></li>
+                <li><a href="Register.html" id="loginLink">Login</a></li> <!-- Profile link will be dynamic -->
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="search">
+        <input type="text" id="searchInput" placeholder="Search here">
+        <button id="searchButton">Search</button>
+
+    </div>
+    <button id="btn3">button3</button>
+
+    <div id="productList"></div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged, signOut,signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCV1eiwKVZs1inaWkVTYVsisI3sIIlAGL0",
+            authDomain: "crud-dd0b4.firebaseapp.com",
+            projectId: "crud-dd0b4",
+            storageBucket: "crud-dd0b4.firebasestorage.app",
+            messagingSenderId: "818921146981",
+            appId: "1:818921146981:web:dbbdba5635bcdf78d3548c"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // Navbar toggle function
+        const hamb=document.getElementById("hamburger")
+        hamb.addEventListener("click",function() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        });
+
+        // Handle authentication state
+        onAuthStateChanged(auth, user => {
+            const loginLink = document.getElementById("loginLink");
+            if (user) {
+                // Change logo to display user name or email
+                // document.getElementById("logo").innerHTML = `<a href="#">${user.displayName || user.email}</a>`;
+                
+                // // Change Login link to Profile
+                loginLink.textContent = "Profile"
+                loginLink.href = "profile.html"; 
+                // loginLink.href = "profile.html"; // Link to user profile page
+
+                // // Optionally, redirect to profile page if clicked
+                // loginLink.onclick = () => {
+                //     window.location.href = 'profile.html';
+                // };
+            } else {
+                console.log("what");
+                //   loginLink.textContent = "Profile"
+                //   loginLink.href = "Register.html"; 
+                // document.getElementById("logo").innerHTML = `<a href="#">MyWebsite</a>`;
+                // loginLink.textContent = "Login";
+         // Link to login page
+                // loginLink.onclick = () => window.location.href = 'Register.html';
+            }
+        });
+
+        // Fetch all products from Firestore
+        async function fetchAllProducts() {
+            const q = query(collection(db, "productsList"));
+            const querySnapshot = await getDocs(q);
+            const productList = document.getElementById("productList");
+            productList.innerHTML = ""; // Clear existing list
+
+            querySnapshot.forEach((doc) => {
+                const productData = doc.data();
+                const productCard = document.createElement("div");
+                productCard.classList.add("product-card");
+
+                const productName = document.createElement("h3");
+                productName.textContent = productData.name;
+
+                const productPrice = document.createElement("p");
+                productPrice.textContent = `Price: $${productData.price}`;
+
+                const productDesc = document.createElement("p");
+                productDesc.textContent = `Description: ${productData.description}`;
+
+                const productCategory = document.createElement("p");
+                productCategory.textContent = `Category: ${productData.category}`;
+
+                const productStock = document.createElement("p");
+                productStock.textContent = `Stock: ${productData.stock}`;
+
+                const productImage = document.createElement("img");
+                productImage.src = productData.image;
+                productImage.alt = productData.name;
+                productImage.style.width = "100%";
+                productImage.style.borderRadius = "5px";
+
+                productCard.append(productName, productPrice, productDesc, productCategory, productStock, productImage);
+                productList.appendChild(productCard);
+            });
+        }
+
+        // Fetch all products when the page loads
+        fetchAllProducts();
+
+        // Search function for products
+        function searchProduct() {
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+            if (searchQuery) {
+                const q = query(collection(db, "productsList"), where("name", "array-contains", searchQuery));
+                getDocs(q).then(querySnapshot => {
+                    const productList = document.getElementById("productList");
+                    productList.innerHTML = "";
+                    querySnapshot.forEach(doc => {
+                        const productData = doc.data();
+                        const productCard = document.createElement("div");
+                        productCard.classList.add("product-card");
+
+                        const productName = document.createElement("h3");
+                        productName.textContent = productData.name;
+
+                        const productPrice = document.createElement("p");
+                        productPrice.textContent = `Price: $${productData.price}`;
+
+                        const productDesc = document.createElement("p");
+                        productDesc.textContent = `Description: ${productData.description}`;
+
+                        const productCategory = document.createElement("p");
+                        productCategory.textContent = `Category: ${productData.category}`;
+
+                        const productStock = document.createElement("p");
+                        productStock.textContent = `Stock: ${productData.stock}`;
+
+                        const productImage = document.createElement("img");
+                        productImage.src = productData.image;
+                        productImage.alt = productData.name;
+                        productImage.style.width = "100%";
+                        productImage.style.borderRadius = "5px";
+
+                        productCard.append(productName, productPrice, productDesc, productCategory, productStock, productImage);
+                        productList.appendChild(productCard);
+                    });
+                }).catch(error => console.error(error));
+            }
+        }
+        let loginli=document.getElementById("loginLink")
+        
+        function profile(){
+            const login = document.getElementById("loginEmail").value;
+            const loginPassword = document.getElementById("loginPassword").value;
+            console.log(login, loginPassword);
+            loginli.innerText="profile"
+            loginli.href="profile.html"
+            
+            signInWithEmailAndPassword(auth, login, loginPassword)
+            .then((userCredential) => {
+                // Logged in 
+                const user = userCredential.user;
+                console.log(user);
+                
+                // alert("Login successful!");
+                // window.location.href = ".html";  // Redirect to main page after successful login
+            })
+            .catch((error) => {
+                alert("Login failed");
+            });
+        }
+        profile()
+
+        // Add event listener to the button
+        document.getElementById('searchButton').addEventListener('click', searchProduct);
+    </script>
+</body>
+</html>
