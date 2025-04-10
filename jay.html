@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Posts</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f7fc;
+      padding: 1rem;
+    }
+
+    h1, h2 {
+      text-align: center;
+    }
+
+    .admin-section {
+      margin-bottom: 3rem;
+    }
+
+    .product-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .product-card h3 {
+      margin: 0.5rem 0;
+    }
+
+    .product-card p {
+      margin: 0.25rem 0;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Admin Product Posts</h1>
+  <div id="adminPostsContainer"></div>
+
+  <script>
+    // Sample data for testing (only if localStorage is empty)
+    if (!localStorage.getItem("Caters")) {
+      const sampleData = [
+        {
+          name: "Gourmet Lunch",
+          description: "Delicious lunch option",
+          stock: 5,
+          category: "Premium",
+          image: "https://via.placeholder.com/250",
+          isAdmin: true,
+          postedBy: "Admin1"
+        },
+        {
+          name: "Family Meal",
+          description: "Ideal for 4-5 people",
+          stock: 10,
+          category: "Family",
+          image: "https://via.placeholder.com/250",
+          isAdmin: true,
+          postedBy: "Admin2"
+        },
+        {
+          name: "Vegan Platter",
+          description: "Healthy and plant-based",
+          stock: 8,
+          category: "Vegan",
+          image: "https://via.placeholder.com/250",
+          isAdmin: true,
+          postedBy: "Admin1"
+        }
+      ];
+      localStorage.setItem("Caters", JSON.stringify(sampleData));
+    }
+
+    const container = document.getElementById("adminPostsContainer");
+    const data = JSON.parse(localStorage.getItem("Caters")) || [];
+function name(params) {
+    
+
+    // Filter admin posts
+    const adminPosts = data.filter(item => item.isAdmin);
+
+    // Group posts by admin
+    const grouped = {};
+    adminPosts.forEach(post => {
+      const admin = post.postedBy || "Unknown Admin";
+      if (!grouped[admin]) {
+        grouped[admin] = [];
+      }
+      grouped[admin].push(post);
+    });
+
+    // Create sections for each admin
+    for (const admin in grouped) {
+      const section = document.createElement("div");
+      section.className = "admin-section";
+
+      const title = document.createElement("h2");
+      title.textContent = `${admin}'s Posts`;
+
+      const cardContainer = document.createElement("div");
+      cardContainer.className = "product-cards";
+
+      grouped[admin].forEach(post => {
+        const card = document.createElement("div");
+        card.className = "product-card";
+
+        card.innerHTML = `
+          <img src="${post.image}" alt="${post.name}" />
+          <h3>${post.name}</h3>
+          <p><strong>Description:</strong> ${post.description}</p>
+          <p><strong>Stock:</strong> ${post.stock}</p>
+          <p><strong>Category:</strong> ${post.category}</p>
+        `;
+
+        cardContainer.appendChild(card);
+      });
+
+      section.appendChild(title);
+      section.appendChild(cardContainer);
+      container.appendChild(section);
+    }
+}
+name()
+  </script>
+
+</body>
+</html>

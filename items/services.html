@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cater Services Around Us</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: url('https://images.unsplash.com/photo-1606788075761-18d0ae12aab4') no-repeat center center/cover;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 1rem 2rem;
+      border-radius: 10px;
+    }
+
+    .container {
+      padding: 2rem 1rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .search-bar {
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .search-bar input, .search-bar select {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      width: 100%;
+      max-width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 1rem;
+    }
+
+    .card-content h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+      color: #333;
+    }
+
+    .card-content p {
+      margin: 0.3rem 0;
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      background-color: #333;
+      color: white;
+    }
+    .navbar {
+      background-color: #333;
+      padding: 1rem;
+      color: white;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+    <nav class="navbar">
+        <button onclick="javascript:history.back()" class="back-button">🔙 Back</button>
+      </nav>
+  <header>
+    <h1>Cater Services Around Us</h1>
+  </header>
+
+  <div class="container">
+    <!-- Search and Filter -->
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search by name or description...">
+      <select id="categoryFilter">
+        <option value="">All Categories</option>
+        <option value="Premium">Premium</option>
+        <option value="Budget">Budget</option>
+        <option value="Family">Family</option>
+        <option value="Vegan">Vegan</option>
+      </select>
+    </div>
+
+    <!-- Cater Service Cards -->
+    <div class="cards" id="cardsContainer">
+      <!-- JS will populate cards -->
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Your Catering Platform. All rights reserved.
+  </footer>
+
+  <script>
+    const caterServices = [
+      {
+        name: "Gourmet Feast",
+        description: "High-end gourmet experience with luxury dishes.",
+        category: "Premium",
+        image: "https://media.istockphoto.com/id/1364975933/photo/indian-ethnic-food-buffet-on-white-concrete-table-top-view-copy-space.webp?a=1&b=1&s=612x612&w=0&k=20&c=uLSdaGHzFJEvVLpRWrvOqMrO5c012dBJzyDZpN0HTPo="
+      },
+      {
+        name: "Family Favorites",
+        description: "Comfort meals perfect for big families.",
+        category: "Family",
+        image: "https://media.istockphoto.com/id/1025672954/photo/beautifully-decorated-catering-banquet-table-with-variety-of-different-food-snacks-and.webp?a=1&b=1&s=612x612&w=0&k=20&c=r35Puyl_SGcDbcUb0i6J4fOa0nItTfhaiLFHunNWPes="
+      },
+      {
+        name: "Vegan Delight",
+        description: "100% plant-based, delicious and healthy.",
+        category: "Vegan",
+        image: "https://media.istockphoto.com/id/2158965107/photo/catering-buffet-in-hotel-restaurant.webp?a=1&b=1&s=612x612&w=0&k=20&c=jcZDviRksQNnqSla4ne55exSzCVYVCq6k2EeKvimmaM="
+      },
+      {
+        name: "Budget Bites",
+        description: "Affordable and tasty meals for every day.",
+        category: "Budget",
+        image: "https://images.unsplash.com/photo-1499028344343-cd173ffc68a9"
+      },
+      {
+        name: "Street Style Catering",
+        description: "Tasty street food brought to your event.",
+        category: "Budget",
+        image: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092"
+      }
+    ];
+
+    const container = document.getElementById("cardsContainer");
+    const searchInput = document.getElementById("searchInput");
+    const categoryFilter = document.getElementById("categoryFilter");
+
+    function renderCards(services) {
+      container.innerHTML = "";
+      if (services.length === 0) {
+        container.innerHTML = "<p>No services found.</p>";
+        return;
+      }
+
+      services.forEach(service => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        card.innerHTML = `
+          <img src="${service.image}" alt="${service.name}">
+          <div class="card-content">
+            <h3>${service.name}</h3>
+            <p>${service.description}</p>
+            <p><strong>Category:</strong> ${service.category}</p>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    function filterServices() {
+      const search = searchInput.value.toLowerCase();
+      const category = categoryFilter.value;
+
+      const filtered = caterServices.filter(service => {
+        const matchesCategory = category === "" || service.category === category;
+        const matchesSearch = service.name.toLowerCase().includes(search) || service.description.toLowerCase().includes(search);
+        return matchesCategory && matchesSearch;
+      });
+
+      renderCards(filtered);
+    }
+
+    // Initial render
+    renderCards(caterServices);
+
+    // Event Listeners
+    searchInput.addEventListener("input", filterServices);
+    categoryFilter.addEventListener("change", filterServices);
+  </script>
+</body>
+</html>

@@ -77,16 +77,25 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword ,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
        
+        // const firebaseConfig = {
+        //   apiKey: "AIzaSyAedJTjKGzpLIAiGGIMQ95cCgS5PhnqgXU",
+        //   authDomain: "regi-48730.firebaseapp.com",
+        //   projectId: "regi-48730",
+        //   storageBucket: "regi-48730.firebasestorage.app",
+        //   messagingSenderId: "740494806021",
+        //   appId: "1:740494806021:web:eead9969344e5038e1e06c"
+        // };
         const firebaseConfig = {
-          apiKey: "AIzaSyAedJTjKGzpLIAiGGIMQ95cCgS5PhnqgXU",
-          authDomain: "regi-48730.firebaseapp.com",
-          projectId: "regi-48730",
-          storageBucket: "regi-48730.firebasestorage.app",
-          messagingSenderId: "740494806021",
-          appId: "1:740494806021:web:eead9969344e5038e1e06c"
+            apiKey: "AIzaSyCV1eiwKVZs1inaWkVTYVsisI3sIIlAGL0",
+            authDomain: "crud-dd0b4.firebaseapp.com",
+            projectId: "crud-dd0b4",
+            storageBucket: "crud-dd0b4.firebasestorage.app",
+            messagingSenderId: "818921146981",
+            appId: "1:818921146981:web:dbbdba5635bcdf78d3548c"
         };
+
       
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
@@ -106,12 +115,30 @@
                 console.log(user);
                 
                 alert("Login successful!");
-                window.location.href = "index.html";  // Redirect to main page after successful login
+                window.location.href = "mainn.html";  // Redirect to main page after successful login
             })
             .catch((error) => {
                 alert("Login failed");
             });
         }
+        onAuthStateChanged(auth, user => {
+            const loginLink = document.getElementById("loginLink");
+            if (user) {
+                // Change logo to display user name or email
+                // document.getElementById("logo").innerHTML = `<a href="#">${user.displayName || user.email}</a>`;
+                
+            
+                // alert("logged in")
+                
+                // loginLink.onclick = () => {
+                    // window.location.href = 'index.html';
+                // };
+            } else {
+                console.log("logged out");
+                
+              
+            }
+        });
     </script>  
 
 </body>

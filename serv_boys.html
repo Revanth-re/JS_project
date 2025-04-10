@@ -175,7 +175,7 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <a href="mainn.html">MyLogo</a>
+                <a href="index.html">MyLogo</a>
             </div>
 
             <!-- Hamburger Icon for Small Screens -->
@@ -188,24 +188,24 @@
             <!-- Navbar Links -->
             <ul class="nav-links">
                 <li><a href="your_services.html">Your-posts</a></li>
-                <li><a href="serv_boys.html">add service</a></li>
-                <!-- <li><a href="#">Discounts</a></li> -->
-                <li><a href="items/help.html">Help</a></li>
-                <li><a href="items/contact.html">Contact</a></li>
+                <li><a href="#">Payments</a></li>
+                <li><a href="#">Discounts</a></li>
+                <li><a href="#">Help</a></li>
+                <li><a href="#">Contact</a></li>
             </ul>
         </nav>
-<div   style="width: 94vw;height: 50vh; background-color: #08204b; margin-top:4%;position: relative;">
-<p   style="color:white;text-align: center; position:absolute; top: 50%
-; left: 10%;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur quasi vel hic animi, natus doloremque id aut accusantium odio esse.</p>
 
-</div>
         <!-- Form Content -->
-        <input type="text" placeholder="Enter_Name_Of_Org" id="inpProductName"> <br>
-        <input type="text" placeholder="Enter-Category" id="inpProductDesc"> <br>
+        <input type="text" placeholder="Enter_cater_name" id="inpProductName"> <br>
+        <input type="text" placeholder="Enter-Category eg:(veg,nonveg)" id="inpProductDesc"> <br>
         <input type="number" placeholder="Enter Price Per Head" id="inpProductPrice"> <br>
-        <input type="text" placeholder="Type of Functions" id="inpProductCategory"> <br>
-        <input type="number" placeholder="Enter-Items" id="inpStockQuantity"> <br>
-        <input type="url" placeholder="Enter-Org-image-URL" id="inpProductImage"> <br>
+        <input type="text" placeholder="Type of Function" id="inpProductCategory"> <br>
+        <input type="text" placeholder="hello"  name="" id="inpStockQuantity">
+        <!-- <textarea type="text" placeholder="Enter-Items" id="inpStockQuantity">text</textarea> <br> -->
+        <!-- <textarea id="inpnewStockQuantity" style="width:50vw" placeholder="enter items you provide in veg and non veg" name="w3review" rows="4" cols="50"></textarea> <br> -->
+        <input type="file" placeholder="Enter-Org-image-URL" id="inpProductImage">
+         <br>
+         <input type="number" placeholder="enter num" id="number">
         <button id="btnAddProduct">Add Product</button> <br>
 
         <input type="text" placeholder="update-your-org" id="inpSearchName"> <br>
@@ -232,7 +232,8 @@ let arr=JSON.parse(localStorage.getItem("Caters"))||[];
         // Firebase functionality
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
         import { getFirestore, addDoc, collection, updateDoc, doc, getDocs, query, where, deleteDoc, orderBy, limit } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js"; // Corrected import
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
         const firebaseConfig = {
             apiKey: "AIzaSyCV1eiwKVZs1inaWkVTYVsisI3sIIlAGL0",
             authDomain: "crud-dd0b4.firebaseapp.com",
@@ -246,13 +247,7 @@ let arr=JSON.parse(localStorage.getItem("Caters"))||[];
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        const currentAdminEmail = "admin@example.com";  // Replace with current admin's email
-
-       
-        // Add Product functionality
-        let btnAddProduct = document.getElementById("btnAddProduct");
-        btnAddProduct.addEventListener("click", async function() {
-            let currentUser = null;
+        let currentUser = null;
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUser = user;
@@ -261,44 +256,35 @@ let arr=JSON.parse(localStorage.getItem("Caters"))||[];
                 console.log("No user is signed in.");
             }
         });
-       
-        
+
+        // Add Product functionality
+        let btnAddProduct = document.getElementById("btnAddProduct");
+        btnAddProduct.addEventListener("click", async function() {
             let productName = document.getElementById("inpProductName").value;
             let productDesc = document.getElementById("inpProductDesc").value;
             let productPrice = document.getElementById("inpProductPrice").value;
             let productCategory = document.getElementById("inpProductCategory").value;
             let stockQuantity = document.getElementById("inpStockQuantity").value;
             let productImage = document.getElementById("inpProductImage").value;
-
-            if (!productName || !productDesc || !productPrice || !productCategory || !stockQuantity || !productImage) {
-                alert("All fields must be filled.");
-                return;
-            }
-
-            try {
-                const docRef = await addDoc(collection(db, "productsList"), {
-                    name: productName,
-                    description: productDesc,
-                    price: productPrice,
-                    category: productCategory,
-                    stock: stockQuantity,
-                    image: productImage,
-                    adminEmail: currentUser.id
+let number=document.getElementById("number")
+           try {
+                const docRef = await addDoc(collection(db, "servdetails"), {
+                    1: productName,
+                    2: productDesc,
+                    3: productPrice,
+                    4: productCategory,
+                    5: stockQuantity,
+                    6: productImage,
+                    7:number
                 });
                 alert("Product added successfully!");
+                
             } catch (e) {
                 alert("Error adding product.");
             }
+
             let obj={name:productName,
-    age:productDesc,
-    class:productPrice,
-    category: productCategory,
-    stock: stockQuantity,
-    image: productImage,
-    adminEmail: currentAdminEmail
-
-}
-
+    age:productDesc}
 arr.push(obj)
 console.log(arr);
  localStorage.setItem("Caters",JSON.stringify(arr));
@@ -311,8 +297,7 @@ console.log(arr);
             let category2=document.getElementById("inpNewProductcategory").value
             let newProductDesc = document.getElementById("inpNewProductDesc").value;
             let newProductPrice = document.getElementById("inpNewProductPrice").value;
-let quantity=document.getElementById("inpnewStockQuantity").value
-
+            let quantity=document.getElementById("inpnewStockQuantity").value;
 
             if (!searchName) {
                 alert("Please enter a product name to update.");
@@ -325,9 +310,9 @@ let quantity=document.getElementById("inpnewStockQuantity").value
             }
 
             try {
-                const q = query(collection(db, "productsList"), where("name", "==", searchName), where("adminEmail", "==", currentAdminEmail));
+                const q = query(collection(db, "servdetails"), where("name", "==", searchName));
                 const querySnapshot = await getDocs(q);
-
+                
                 if (querySnapshot.empty) {
                     alert("No product found with that name.");
                     return;
@@ -336,8 +321,10 @@ let quantity=document.getElementById("inpnewStockQuantity").value
                 querySnapshot.forEach(async (doc) => {
                     const productDocRef = doc.ref;
                     await updateDoc(productDocRef, {
-                        description: newProductDesc,
-                        price: newProductPrice
+                        1: newProductDesc,
+                        2: newProductPrice,
+                        3:searchName,
+                        4:category2
                     });
                 });
 
@@ -358,7 +345,7 @@ let quantity=document.getElementById("inpnewStockQuantity").value
             }
 
             try {
-                const q = query(collection(db, "productsList"), where("name", "==", deleteName), where("adminEmail", "==", currentAdminEmail));
+                const q = query(collection(db, "servdetails"), where("name", "==", deleteName));
                 const querySnapshot = await getDocs(q);
 
                 if (querySnapshot.empty) {

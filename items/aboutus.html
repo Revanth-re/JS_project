@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us - Catering Services</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4') no-repeat center center/cover;
+      height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 1rem 2rem;
+      border-radius: 10px;
+    }
+
+    .container {
+      padding: 2rem 1rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      color: #444;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: #555;
+    }
+
+    .team-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .team-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .team-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #333;
+      color: white;
+      margin-top: 2rem;
+    }
+    .navbar {
+      background-color: #333;
+      padding: 1rem;
+      color: white;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+    <nav class="navbar">
+        <button onclick="javascript:history.back()" class="back-button">🔙 Back</button>
+      </nav>
+  <header>
+    <h1>About Our Catering Platform</h1>
+  </header>
+
+  <div class="container">
+
+    <section>
+      <h2>Our Mission</h2>
+      <p>
+        We aim to connect people with the best catering services around them—whether it's for a wedding, a birthday, a corporate event, or just a family dinner. Our goal is to make finding and booking caterers easy, reliable, and tailored to every taste and budget.
+      </p>
+    </section>
+
+    <section>
+      <h2>Why Choose Us?</h2>
+      <p>
+        We bring together a curated list of premium and budget-friendly caterers in your area. All our listed providers are handpicked for their quality, reliability, and customer satisfaction. Our easy-to-use interface helps you browse, compare, and book in just a few clicks.
+      </p>
+      <p>
+        Whether you're looking for vegan platters, gourmet feasts, or street food vibes—our platform helps you find exactly what you need.
+      </p>
+    </section>
+
+    <section>
+      <h2>Meet the Team</h2>
+      <div class="team-section">
+        <div class="team-card">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Team Member">
+          <h3>David Green</h3>
+          <p>Founder & CEO</p>
+        </div>
+        <div class="team-card">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Team Member">
+          <h3>Emma Lopez</h3>
+          <p>Product Manager</p>
+        </div>
+        <div class="team-card">
+          <img src="https://randomuser.me/api/portraits/men/76.jpg" alt="Team Member">
+          <h3>Michael Lee</h3>
+          <p>Lead Developer</p>
+        </div>
+        <div class="team-card">
+          <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Team Member">
+          <h3>Sara Ahmed</h3>
+          <p>Customer Experience</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    &copy; 2025 Catering Platform. Designed with ❤️ for food lovers.
+  </footer>
+
+</body>
+</html>

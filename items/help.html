@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Help & Support - Catering Services</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f7fc;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Navbar Styling */
+    .navbar {
+      background-color: #333;
+      padding: 1rem;
+      color: white;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .back-button {
+      color: white;
+      background-color: #007BFF;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .back-button:hover {
+      background-color: #0056b3;
+    }
+
+    header {
+      background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d') no-repeat center center/cover;
+      height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 1rem 2rem;
+      border-radius: 10px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    h2 {
+      margin: 2rem 0 1rem;
+      color: #444;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: #555;
+    }
+
+    .faq {
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      margin-bottom: 1.5rem;
+    }
+
+    .faq h3 {
+      margin-bottom: 0.5rem;
+      color: #222;
+    }
+
+    .contact-box {
+      background-color: #fff;
+      border-left: 5px solid #007bff;
+      padding: 1rem 1.5rem;
+      margin-top: 2rem;
+      border-radius: 5px;
+    }
+
+    .contact-box strong {
+      color: #333;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #333;
+      color: white;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar with Back Button -->
+  <nav class="navbar">
+    <button onclick="javascript:history.back()" class="back-button">🔙 Back</button>
+  </nav>
+
+  <!-- Page Header -->
+  <header>
+    <h1>Help & Support</h1>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+
+    <p>Welcome to our help page. We're here to assist with any issues you may experience using our catering services platform. If your issue isn't listed, please <a href="contact.html">contact us</a>.</p>
+
+    <!-- Server Issues -->
+    <section class="faq">
+      <h2>🖥️ Server & Technical Issues</h2>
+
+      <div>
+        <h3>1. The website is slow or not loading?</h3>
+        <p>This may be due to temporary server maintenance. Please try refreshing or check back later. If the issue persists for more than 15 minutes, contact our support team.</p>
+
+        <h3>2. I can't log in or sign up?</h3>
+        <p>Make sure you are connected to the internet and your credentials are correct. If you forgot your password, use the "Forgot Password" option or contact support for account recovery.</p>
+      </div>
+    </section>
+
+    <!-- Food & Catering Service Issues -->
+    <section class="faq">
+      <h2>🍽️ Food & Catering Concerns</h2>
+
+      <div>
+        <h3>1. My order didn’t arrive or was late.</h3>
+        <p>We’re sorry to hear that. Please contact the service provider directly via their profile or report the issue to us with your order ID.</p>
+
+        <h3>2. The food was not as described or of poor quality.</h3>
+        <p>You can leave a review for the caterer and also report the issue via our platform. We take food quality seriously and will investigate any reports.</p>
+      </div>
+    </section>
+
+    <!-- Payment Issues -->
+    <section class="faq">
+      <h2>💳 Payment & Billing Issues</h2>
+
+      <div>
+        <h3>1. I was charged but didn’t get confirmation.</h3>
+        <p>Sometimes confirmation emails are delayed. Check your spam/junk folders. If you still haven’t received anything after 10 minutes, please contact us with proof of payment.</p>
+
+        <h3>2. My payment failed.</h3>
+        <p>Please ensure your card details are correct and that your bank supports online transactions. You can also try a different payment method or reach out to support.</p>
+      </div>
+    </section>
+
+    <!-- More About Us -->
+    <section>
+      <h2>🤝 More About Us</h2>
+      <p>We’re passionate about connecting people with reliable, high-quality catering services in their area. Our platform supports both individual and corporate events, offering a wide range of menus and services. With our growing network of verified caterers, we aim to make every meal memorable.</p>
+      <p>We value transparency, food safety, and customer satisfaction above all. If something goes wrong, we work quickly to make it right.</p>
+    </section>
+
+    <!-- Contact Info -->
+    <div class="contact-box">
+      <h3>📞 Need More Help?</h3>
+      <p><strong>Email:</strong> support@cateringplatform.com</p>
+      <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+      <p><strong>WhatsApp:</strong> +1 (555) 987-6543</p>
+      <p><strong>Live Chat:</strong> Available 9am – 6pm, Mon–Sat</p>
+      <p><strong>Instagram / Facebook:</strong> @catering_platform</p>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Catering Platform – Helping You Host Better.
+  </footer>
+
+</body>
+</html>

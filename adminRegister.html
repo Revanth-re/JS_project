@@ -87,19 +87,42 @@
     </div>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+        import { getAuth, createUserWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 
         const firebaseConfig = {
-          apiKey: "AIzaSyAQdxzBsX6lYBmOC77tJWk9fGhN301-a7M",
-          authDomain: "admincredentials.firebaseapp.com",
-          projectId: "admincredentials",
-          storageBucket: "admincredentials.firebasestorage.app",
-          messagingSenderId: "589725712079",
-          appId: "1:589725712079:web:59bd0a95769ecf759301ba"
+            apiKey: "AIzaSyCV1eiwKVZs1inaWkVTYVsisI3sIIlAGL0",
+            authDomain: "crud-dd0b4.firebaseapp.com",
+            projectId: "crud-dd0b4",
+            storageBucket: "crud-dd0b4.firebasestorage.app",
+            messagingSenderId: "818921146981",
+            appId: "1:818921146981:web:dbbdba5635bcdf78d3548c"
         };
-
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        onAuthStateChanged(auth, user => {
+            const loginLink = document.getElementById("loginLink");
+            if (user) {
+                // loginLink.innerText = "Profile";
+                // loginLink.setAttribute("href", "profile.html");
+                window.location.href="provide_serv.html"
+                // document.getElementById("logoutLink").style.display = 'inline-block';
+                // console.log(user.email);
+
+                let arr=[]
+                let obj={name:user.email}
+                arr.push(obj)
+                const local=localStorage.setItem("Profiles",JSON.stringify(arr))
+// console.log(local);
+
+
+
+            } else {
+                loginLink.innerText = "Login";
+                loginLink.setAttribute("href", "Register.html");
+                document.getElementById("logoutLink").style.display = 'none';
+            }
+        });
+
 
         const btn1 = document.getElementById("btn1");
         btn1.addEventListener("click", func);

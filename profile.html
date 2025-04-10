@@ -6,6 +6,23 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>sdfghjkl</h1>
+    <h1>profile</h1>
+    <li><a id="logoutLink" style="display:none; cursor:pointer;">Log-Out</a></li>
+    <!-- <button id="btn3">logout</button> -->
+<div id="div"></div>
+    <script>
+         // Handle button click
+         let data=JSON.parse(localStorage.getItem("Profiles"))
+         console.log(data)
+         let div=document.getElementById("div")
+         data.forEach(element => {
+            console.log(element);
+            const name=document.createElement("p")
+            name.innerText=element.name
+
+            div.append(name)
+         });
+
+    </script>
 </body>
 </html>

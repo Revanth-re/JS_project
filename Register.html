@@ -89,50 +89,69 @@
             <button id="btn1">Sign Up</button>
             <a href="login.html">login</a>
         </div>
+        <button id="logout" style="display:none;">logout</button>
 
         <!-- Google Sign-In Button -->
         <div class="google-btn" id="googleBtn">
-            <span class="google-icon">&#9733;</span> Sign Up with Google
+            <!-- <span class="google-icon">&#9733;</span> Sign Up with Google -->
         </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+        import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
        
+        // const firebaseConfig = {
+        //     apiKey: "AIzaSyAedJTjKGzpLIAiGGIMQ95cCgS5PhnqgXU",
+        //     authDomain: "regi-48730.firebaseapp.com",
+        //     projectId: "regi-48730",
+        //     storageBucket: "regi-48730.firebasestorage.app",
+        //     messagingSenderId: "740494806021",
+        //     appId: "1:740494806021:web:eead9969344e5038e1e06c"
+        // };
         const firebaseConfig = {
-            apiKey: "AIzaSyAedJTjKGzpLIAiGGIMQ95cCgS5PhnqgXU",
-            authDomain: "regi-48730.firebaseapp.com",
-            projectId: "regi-48730",
-            storageBucket: "regi-48730.firebasestorage.app",
-            messagingSenderId: "740494806021",
-            appId: "1:740494806021:web:eead9969344e5038e1e06c"
+            apiKey: "AIzaSyCV1eiwKVZs1inaWkVTYVsisI3sIIlAGL0",
+            authDomain: "crud-dd0b4.firebaseapp.com",
+            projectId: "crud-dd0b4",
+            storageBucket: "crud-dd0b4.firebasestorage.app",
+            messagingSenderId: "818921146981",
+            appId: "1:818921146981:web:dbbdba5635bcdf78d3548c"
         };
-      
+
+
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        // Sign Up with Email and Password
+        // Check if the user is already logged in
+        onAuthStateChanged(auth, user => {
+            const logoutBtn = document.getElementById("logout");
+
+            if (user) {
+                // If logged in, redirect to the main page
+                window.location.href = 'mainn.html'; 
+                console.log("userloged in");
+                
+            } else {
+                console.log("User not logged in");
+            }
+        });
+
         const btn1 = document.getElementById("btn1");
         btn1.addEventListener("click", func);
 
         function func() {
             const email = document.getElementById("signupEmail").value;
             const password = document.getElementById("signupPassword").value;
-            console.log(email, password);
 
             createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                console.log(user);
                 alert("Sign up successful!");
                 window.location.href = "login.html"; // Redirect to login page 
             })
             .catch((error) => {
-                const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log(error);
                 alert("Sign up failed: " + errorMessage);
             });
         }
@@ -146,18 +165,14 @@
             signInWithPopup(auth, provider)
             .then((result) => {
                 const user = result.user;
-                console.log(user);
                 alert("Google Sign-In successful!");
-                window.location.href = "main.html"; // Redirect to main page after Google login
+                window.location.href = "index.html"; // Redirect to main page after Google login
             })
             .catch((error) => {
-                const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log(error);
                 alert("Google Sign-In failed: " + errorMessage);
             });
         });
-
     </script>
 
 </body>
