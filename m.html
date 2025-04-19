@@ -1,168 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Booking Modal Example</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .product-card {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
 
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f7fc;
-      color: #333;
-      line-height: 1.6;
-    }
+        .product-card img {
+            width: 100%;
+            height: auto;
+        }
 
-    /* Button to open the modal */
-    .open-modal-btn {
-      padding: 0.8rem 1.5rem;
-      background-color: #007bff;
-      color: white;
-      font-size: 1.2rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
+        .category-btn {
+            cursor: pointer;
+            margin: 5px;
+        }
 
-    .open-modal-btn:hover {
-      background-color: #0056b3;
-    }
+        .category-btn:hover {
+            background-color: #007bff;
+            color: white;
+        }
 
-    /* The Modal */
-    .modal {
-      display: none; /* Hidden by default */
-      position: fixed;
-      z-index: 1; /* Sit on top */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
-    }
-
-    /* Modal Content */
-    .modal-content {
-      background-color: #fff;
-      margin: 15% auto;
-      padding: 20px;
-      border-radius: 10px;
-      width: 70%; /* Set the width of the modal */
-      max-width: 600px;
-    }
-
-    /* Close Button */
-    .close-btn {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .close-btn:hover,
-    .close-btn:focus {
-      color: black;
-      text-decoration: none;
-    }
-
-    /* Form Styling */
-    .modal-form input,
-    .modal-form select {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .modal-form button {
-      width: 100%;
-      padding: 10px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .modal-form button:hover {
-      background-color: #0056b3;
-    }
-  </style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
+
 <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Brand</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <button id="loginLink" class="nav-link" onclick="handleLogin()">Login</button>
+                    </li>
+                    <li class="nav-item">
+                        <button id="logoutLink" class="nav-link" onclick="handleLogout()">Logout</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-  <!-- Button to open the modal -->
-  <button class="open-modal-btn">Book Catering</button>
-
-  <!-- The Modal -->
-  <div id="bookingModal" class="modal">
-
-    <!-- Modal Content -->
-    <div class="modal-content">
-      <span class="close-btn">&times;</span>
-      <h2>Book Catering Service</h2>
-      
-      <!-- Booking Form -->
-      <form class="modal-form">
-        <label for="fullName">Full Name:</label>
-        <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
-
-        <label for="cardType">Card Type:</label>
-        <select id="cardType" name="cardType" required>
-          <option value="">Select Card Type</option>
-          <option value="credit">Credit Card</option>
-          <option value="debit">Debit Card</option>
-        </select>
-
-        <label for="cardNumber">Card Number:</label>
-        <input type="text" id="cardNumber" name="cardNumber" placeholder="Enter your card number" required>
-
-        <label for="date">Booking Date:</label>
-        <input type="date" id="date" name="date" required>
-
-        <button type="submit">Confirm Booking</button>
-      </form>
+    <!-- Category Buttons -->
+    <div class="container mt-3">
+        <div class="category-buttons">
+            <button class="category-btn btn btn-outline-primary" data-category="all">All</button>
+            <button class="category-btn btn btn-outline-primary" data-category="category1">Category 1</button>
+            <button class="category-btn btn btn-outline-primary" data-category="category2">Category 2</button>
+            <button class="category-btn btn btn-outline-primary" data-category="category3">Category 3</button>
+        </div>
     </div>
 
-  </div>
+    <!-- Product List -->
+    <div class="container mt-3">
+        <div id="productList" class="row">
+            <!-- Dynamic product cards will be inserted here -->
+        </div>
+    </div>
 
-  <script>
-    // Get the modal
-    var modal = document.getElementById("bookingModal");
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCV1eiwKVZs1inaWkVTYVsisI3sIIlAGL0",
+                authDomain: "crud-dd0b4.firebaseapp.com",
+                projectId: "crud-dd0b4",
+                storageBucket: "crud-dd0b4.firebasestorage.app",
+                messagingSenderId: "818921146981",
+                appId: "1:818921146981:web:dbbdba5635bcdf78d3548c"
+        };
 
-    // Get the button that opens the modal
-    var btn = document.querySelector(".open-modal-btn");
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const auth = firebase.auth();
 
-    // Get the <span> element that closes the modal
-    var span = document.querySelector(".close-btn");
+        let allProducts = []; // To store all products for filtering
 
-    // When the user clicks the button, open the modal
-    btn.addEventListener("click", function() {
-      modal.style.display = "block";
-    });
+        // Handle login
+        function handleLogin() {
+            const email = prompt("Enter your email:");
+            const password = prompt("Enter your password:");
+            auth.signInWithEmailAndPassword(email, password)
+                .then(() => {
+                    alert("Logged in successfully");
+                    document.getElementById("loginLink").style.display = "none";
+                    document.getElementById("logoutLink").style.display = "inline-block";
+                })
+                .catch((error) => {
+                    alert("Login failed: " + error.message);
+                });
+        }
 
-    // When the user clicks on <span> (x), close the modal
-    span.addEventListener("click", function() {
-      modal.style.display = "none";
-    });
+        // Handle logout
+        function handleLogout() {
+            auth.signOut()
+                .then(() => {
+                    alert("Logged out successfully");
+                    document.getElementById("loginLink").style.display = "inline-block";
+                    document.getElementById("logoutLink").style.display = "none";
+                })
+                .catch((error) => {
+                    alert("Logout failed: " + error.message);
+                });
+        }
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.addEventListener("click", function(event) {
-      if (event.target === modal) {
-        modal.style.display = "none";
-      }
-    });
-  </script>
+        // Listen for authentication state changes
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                document.getElementById("loginLink").style.display = "none";
+                document.getElementById("logoutLink").style.display = "inline-block";
+            } else {
+                document.getElementById("loginLink").style.display = "inline-block";
+                document.getElementById("logoutLink").style.display = "none";
+            }
+        });
 
+        // Fetch products from Firestore
+        async function fetchProducts() {
+            const q = firebase.firestore().collection("productsList");
+            const querySnap = await q.get();
+            querySnap.forEach((doc) => {
+                const data = doc.data();
+                allProducts.push(data); // Store all products for filtering
+            });
+            displayProducts(allProducts); // Display all products initially
+        }
+
+        // Display products dynamically
+        function displayProducts(products) {
+            const productList = document.getElementById("productList");
+            productList.innerHTML = ""; // Clear the existing products
+            products.forEach((productData) => {
+                const productCard = document.createElement("div");
+                productCard.classList.add("col-md-4", "product-card");
+
+                const productName = document.createElement("h3");
+                productName.textContent = productData.name;
+
+                const productPrice = document.createElement("p");
+                productPrice.textContent = `Price: ₹${productData.price}`;
+
+                const productDesc = document.createElement("p");
+                productDesc.textContent = `Description: ${productData.description}`;
+
+                const productCategory = document.createElement("p");
+                productCategory.textContent = `Category: ${productData.category}`;
+
+                const productImage = document.createElement("img");
+                productImage.src = productData.imageUrl;
+                productImage.loading = "lazy";
+
+                productCard.append(productImage, productName, productPrice, productDesc, productCategory);
+                productList.appendChild(productCard);
+            });
+        }
+
+        // Category filter logic
+        document.querySelectorAll(".category-btn").forEach((button) => {
+            button.addEventListener("click", (e) => {
+                const selectedCategory = e.target.getAttribute("data-category").toLowerCase();
+                const filteredProducts = selectedCategory === "all" ?
+                    allProducts : allProducts.filter(p => p.category && p.category.toLowerCase() === selectedCategory);
+                displayProducts(filteredProducts);
+            });
+        });
+
+        // Initialize the app by fetching products
+        fetchProducts();
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

@@ -1,28 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #eef2f3, #ffffff);
+    }
+
+    .navbar {
+      background-color: #4a90e2;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .navbar button {
+      background-color: white;
+      color: #4a90e2;
+      border: none;
+      padding: 8px 18px;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .navbar button:hover {
+      background-color: #e0e0e0;
+    }
+
+    .profile-container {
+      max-width: 480px;
+      margin: 60px auto;
+      background: white;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .profile-container:hover {
+      transform: translateY(-3px);
+    }
+
+    .profile-photo {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 4px solid #4a90e2;
+      transition: transform 0.3s ease;
+    }
+
+    .profile-photo:hover {
+      transform: scale(1.05);
+    }
+
+    .upload-label {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: #4a90e2;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .upload-btn {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      transition: background-color 0.3s;
+    }
+
+    .upload-btn:hover {
+      background-color: #367bd1;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 28px;
+    }
+
+    .profile-details p {
+      font-size: 16px;
+      color: #444;
+      margin: 10px 0;
+    }
+
+    #logoutLink {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 24px;
+      background-color: #ff4d4f;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    #logoutLink:hover {
+      background-color: #d9363e;
+    }
+
+    @media (max-width: 600px) {
+      .profile-container {
+        margin: 30px 20px;
+        padding: 25px 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .upload-btn, #logoutLink {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>profile</h1>
-    <li><a id="logoutLink" style="display:none; cursor:pointer;">Log-Out</a></li>
-    <!-- <button id="btn3">logout</button> -->
-<div id="div"></div>
-    <script>
-         // Handle button click
-         let data=JSON.parse(localStorage.getItem("Profiles"))
-         console.log(data)
-         let div=document.getElementById("div")
-         data.forEach(element => {
-            console.log(element);
-            const name=document.createElement("p")
-            name.innerText=element.name
 
-            div.append(name)
-         });
+  <!-- Navbar with Back Button -->
+  <div class="navbar">
+    <button onclick="history.back()">← Back</button>
+    <span style="font-weight: bold;">My Profile</span>
+  </div>
 
-    </script>
+  <div class="profile-container">
+    <img id="img" class="profile-photo" src="" alt="Profile Photo"/> <br>
+    
+    <label for="input" class="upload-label"><i class="fa-solid fa-upload"></i> Choose a Profile Photo</label>
+    <input type="file" id="input">
+    <br>
+    <button id="btn" class="upload-btn"><i class="fa-solid fa-plus"></i> Upload</button>
+
+    <h1>Profile</h1>
+    <div id="div" class="profile-details"></div>
+    <a id="logoutLink">Log Out</a>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+    import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCV1eiwKVZs1inaWkVTYVsisI3sIIlAGL0",
+      authDomain: "crud-dd0b4.firebaseapp.com",
+      projectId: "crud-dd0b4",
+      storageBucket: "crud-dd0b4.firebasestorage.app",
+      messagingSenderId: "818921146981",
+      appId: "1:818921146981:web:dbbdba5635bcdf78d3548c"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+
+    let data2 = JSON.parse(localStorage.getItem("userdetails")) || [];
+
+    data2.forEach(val => {
+      const name = document.createElement("p");
+      name.innerText = `Name: ${val.email}`;
+
+      const first = document.createElement("p");
+      first.innerText = `First Name: ${val.firstname}`;
+
+      const second = document.createElement("p");
+      second.innerText = `Last Name: ${val.lastname}`;
+
+      document.getElementById("div").append(first, second, name);
+    });
+
+    document.getElementById("logoutLink").onclick = async () => {
+      await signOut(auth);
+      alert('You have logged out!');
+      window.location = "mainn.html";
+    };
+
+    const input = document.getElementById("input");
+    const btn = document.getElementById("btn");
+    btn.addEventListener("click", () => {
+      let file = input.files[0];
+      if (!file) return alert("Please choose an image first.");
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        document.getElementById("img").src = reader.result;
+      };
+    });
+  </script>
+
 </body>
 </html>

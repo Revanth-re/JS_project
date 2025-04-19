@@ -27,9 +27,9 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        input[type="email"], input[type="password"] {
+        input {
             width: 100%;
-            padding: 10px;
+            padding: 2%;
             margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -84,6 +84,9 @@
 
         <!-- Sign Up Form -->
         <div class="form-container">
+            <input type="text" id="first" placeholder="enter first name">
+            <input type="text" id="second" name="" placeholder="last" >
+        
             <input type="email" id="signupEmail" placeholder="Email" required />
             <input type="password" id="signupPassword" placeholder="Password" required />
             <button id="btn1">Sign Up</button>
@@ -92,9 +95,9 @@
         <button id="logout" style="display:none;">logout</button>
 
         <!-- Google Sign-In Button -->
-        <div class="google-btn" id="googleBtn">
+        <!-- <div class="google-btn" id="googleBtn"> -->
             <!-- <span class="google-icon">&#9733;</span> Sign Up with Google -->
-        </div>
+        <!-- </div> -->
     </div>
 
     <script type="module">
@@ -127,8 +130,30 @@
         onAuthStateChanged(auth, user => {
             const logoutBtn = document.getElementById("logout");
 
-            if (user) {
+      
                 // If logged in, redirect to the main page
+
+                if (user) {
+                // loginLink.innerText = "Profile";
+                // loginLink.setAttribute("href", "profile.html");
+                const first=document.getElementById("first").value
+                const second=document.getElementById('second').value
+          
+                let arr3=[]
+                let obj1={firstname:first,
+                    lastname:second,
+                    email:user.email
+
+             
+                }
+                arr3.push(obj1)
+              const local3=localStorage.setItem("userdetails",JSON.stringify(arr3))
+
+
+
+  window.location.href="AdminLogin.html"
+
+            
                 window.location.href = 'mainn.html'; 
                 console.log("userloged in");
                 
@@ -141,10 +166,12 @@
         btn1.addEventListener("click", func);
 
         function func() {
+            const first=document.getElementById("first").value
+            const second=document.getElementById("second").value
             const email = document.getElementById("signupEmail").value;
             const password = document.getElementById("signupPassword").value;
 
-            createUserWithEmailAndPassword(auth, email, password)
+            createUserWithEmailAndPassword(auth, email, password,first,second)
             .then((userCredential) => {
                 const user = userCredential.user;
                 alert("Sign up successful!");

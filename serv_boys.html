@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Form</title>
     <style>
-        /* Basic Reset */
         * {
             margin: 0;
             padding: 0;
@@ -15,12 +14,10 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f7fc;
-            margin: 0;
             padding: 2rem;
             font-size: 1rem;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             min-height: 100vh;
         }
@@ -31,7 +28,6 @@
             margin-bottom: 3rem;
         }
 
-        /* Navbar Styling */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -41,7 +37,7 @@
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            position: relative;  /* Set navbar to relative to help position the hamburger */
+            position: relative;
         }
 
         .logo a {
@@ -72,7 +68,6 @@
             border-radius: 0.5rem;
         }
 
-        /* Hamburger Icon */
         .hamburger {
             display: none;
             cursor: pointer;
@@ -80,7 +75,7 @@
             gap: 4px;
             width: 30px;
             height: 25px;
-            position: absolute;  /* Position the hamburger icon on the top right */
+            position: absolute;
             right: 1rem;
             top: 1rem;
         }
@@ -92,14 +87,12 @@
             transition: all 0.3s ease;
         }
 
-        /* Layout for smaller screens */
         @media (max-width: 768px) {
             .nav-links {
                 flex-direction: column;
                 display: none;
                 width: 100%;
                 margin-top: 1rem;
-                padding: 0;
             }
 
             .nav-links.active {
@@ -116,57 +109,34 @@
             }
         }
 
-        /* Layout for larger screens */
-        @media (min-width: 768px) {
-            .nav-links {
-                display: flex;
-            }
-
-            .hamburger {
-                display: none;
-            }
-        }
-
-        /* Input Fields Styling */
-        input {
+        input, button {
             width: 50vw;
             padding: 1rem;
             margin-bottom: 1.5rem;
             border-radius: 0.5rem;
-            border: 1px solid #ccc;
             font-size: 1rem;
             box-sizing: border-box;
+        }
+
+        input {
+            border: 1px solid #ccc;
         }
 
         button {
             background-color: #4CAF50;
             color: white;
             border: none;
-            padding: 1rem;
-            border-radius: 0.5rem;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            width: 50VW;
-            font-size: 1rem;
         }
 
         button:hover {
             background-color: #45a049;
         }
 
-        /* Error message */
-        .error-message {
-            color: red;
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        /* Center the content */
         .form-container {
             width: 100%;
             max-width: 600px;
-            margin: 0 auto;
             text-align: left;
         }
     </style>
@@ -177,15 +147,11 @@
             <div class="logo">
                 <a href="index.html">MyLogo</a>
             </div>
-
-            <!-- Hamburger Icon for Small Screens -->
             <div class="hamburger" id="hamburger">
                 <div></div>
                 <div></div>
                 <div></div>
             </div>
-
-            <!-- Navbar Links -->
             <ul class="nav-links">
                 <li><a href="your_services.html">Your-posts</a></li>
                 <li><a href="#">Payments</a></li>
@@ -194,176 +160,164 @@
                 <li><a href="#">Contact</a></li>
             </ul>
         </nav>
-
-        <!-- Form Content -->
-        <input type="text" placeholder="Enter_cater_name" id="inpProductName"> <br>
-        <input type="text" placeholder="Enter-Category eg:(veg,nonveg)" id="inpProductDesc"> <br>
-        <input type="number" placeholder="Enter Price Per Head" id="inpProductPrice"> <br>
-        <input type="text" placeholder="Type of Function" id="inpProductCategory"> <br>
-        <input type="text" placeholder="hello"  name="" id="inpStockQuantity">
-        <!-- <textarea type="text" placeholder="Enter-Items" id="inpStockQuantity">text</textarea> <br> -->
-        <!-- <textarea id="inpnewStockQuantity" style="width:50vw" placeholder="enter items you provide in veg and non veg" name="w3review" rows="4" cols="50"></textarea> <br> -->
-        <input type="file" placeholder="Enter-Org-image-URL" id="inpProductImage">
-         <br>
-         <input type="number" placeholder="enter num" id="number">
-        <button id="btnAddProduct">Add Product</button> <br>
-
-        <input type="text" placeholder="update-your-org" id="inpSearchName"> <br>
-        <input type="text" placeholder="Enter-description" id="inpNewProductDesc"> <br>
-        <input type="text" placeholder="Enter-category" id="inpNewProductcategory"> <br>
-                
-        <input type="number" placeholder="Enter-Items" id="inpNewProductPrice">
-        <input type="number" placeholder="Enter-Items" id="inpnewStockQuantity"> 
-        <button id="btnUpdateProduct">Update Product</button> <br>
-
-        <input type="text" placeholder="Enter product name to delete" id="inpDeleteName"> <br>
-        <button id="btnDeleteProduct">Delete Product</button> <br>
     </header>
 
+    <main class="form-container">
+        <input type="text" placeholder="Enter Cater Name" id="inpProductName">
+        <input type="text" placeholder="Enter Category (e.g., veg, nonveg)" id="inpProductDesc">
+        <input type="number" placeholder="Enter Price Per Head" id="inpProductPrice">
+        <input type="text" placeholder="Type of Function" id="inpProductCategory">
+        <input type="text" placeholder="Enter timings" id="inpStockQuantity">
+        <input type="file" placeholder="Enter Org Image URL" id="inpProductImage">
+        <input type="text" placeholder="Location or area" id="location">
+        <input type="number" placeholder="Enter Contact Number" id="number">
+        <button id="btnAddProduct">Add Product</button>
+
+        <input type="text" placeholder="Update - Enter Cater Name" id="inpSearchName">
+        <input type="text" placeholder="Enter New Description" id="inpNewProductDesc">
+        <input type="text" placeholder="Enter New Category" id="inpNewProductcategory">
+        <input type="number" placeholder="Enter New Price" id="inpNewProductPrice">
+        <input type="text" placeholder="Enter new timings" id="inpnewStockQuantity">
+        <button id="btnUpdateProduct">Update Product</button>
+
+        <input type="text" placeholder="Enter Cater Name to Delete" id="inpDeleteName">
+        <button id="btnDeleteProduct">Delete Product</button>
+    </main>
+
     <script type="module">
-        // JavaScript for the Hamburger Menu toggle
-        const hamburger = document.getElementById("hamburger");
-        const navLinks = document.querySelector(".nav-links");
-
-        hamburger.addEventListener("click", () => {
-            navLinks.classList.toggle("active");
-        });
-let arr=JSON.parse(localStorage.getItem("Caters"))||[];
-        // Firebase functionality
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-        import { getFirestore, addDoc, collection, updateDoc, doc, getDocs, query, where, deleteDoc, orderBy, limit } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+        import { getFirestore, addDoc, collection, query, where, getDocs, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
-
+        
         const firebaseConfig = {
             apiKey: "AIzaSyCV1eiwKVZs1inaWkVTYVsisI3sIIlAGL0",
             authDomain: "crud-dd0b4.firebaseapp.com",
             projectId: "crud-dd0b4",
-            storageBucket: "crud-dd0b4.firebasestorage.app",
+            storageBucket: "crud-dd0b4.appspot.com",
             messagingSenderId: "818921146981",
             appId: "1:818921146981:web:dbbdba5635bcdf78d3548c"
         };
-
+        
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
-
+        
         let currentUser = null;
         onAuthStateChanged(auth, (user) => {
-            if (user) {
-                currentUser = user;
-                console.log("Current user UID:", currentUser.uid);
-            } else {
-                console.log("No user is signed in.");
-            }
+            currentUser = user;
         });
+        
+        document.getElementById("btnAddProduct").addEventListener("click", async () => {
+            const productName = document.getElementById("inpProductName").value.trim();
+            const productDesc = document.getElementById("inpProductDesc").value.trim();
+            const productPrice = document.getElementById("inpProductPrice").value.trim();
+            const productCategory = document.getElementById("inpProductCategory").value.trim();
 
-        // Add Product functionality
-        let btnAddProduct = document.getElementById("btnAddProduct");
-        btnAddProduct.addEventListener("click", async function() {
-            let productName = document.getElementById("inpProductName").value;
-            let productDesc = document.getElementById("inpProductDesc").value;
-            let productPrice = document.getElementById("inpProductPrice").value;
-            let productCategory = document.getElementById("inpProductCategory").value;
-            let stockQuantity = document.getElementById("inpStockQuantity").value;
-            let productImage = document.getElementById("inpProductImage").value;
-let number=document.getElementById("number")
-           try {
-                const docRef = await addDoc(collection(db, "servdetails"), {
-                    1: productName,
-                    2: productDesc,
-                    3: productPrice,
-                    4: productCategory,
-                    5: stockQuantity,
-                    6: productImage,
-                    7:number
+            const stockQuantity = document.getElementById("inpStockQuantity").value.trim();
+            const location = document.getElementById("location").value.trim();
+
+            const contactNumber = document.getElementById("number").value.trim();
+            const fileInput = document.getElementById("inpProductImage");
+            const file = fileInput.files[0];
+        
+            if (!productName || !productDesc || !productPrice || !productCategory || !stockQuantity || !contactNumber || !file) {
+                alert("Please fill all fields and upload an image.");
+                return;
+            }
+        
+            try {
+                const base64 = await readFileAsBase64(file);
+                await addDoc(collection(db, "servdetails"), {
+                    name: productName,
+                    functionType: productDesc,
+                    price: Number(productPrice),
+                    description: productCategory,
+                    items: stockQuantity,
+                    imageUrl: base64,
+                    contact: contactNumber,
+                    location:location
                 });
                 alert("Product added successfully!");
-                
-            } catch (e) {
+                fileInput.value = ""; // reset file input
+            } catch (error) {
+                console.error("Error adding product:", error);
                 alert("Error adding product.");
             }
-
-            let obj={name:productName,
-    age:productDesc}
-arr.push(obj)
-console.log(arr);
- localStorage.setItem("Caters",JSON.stringify(arr));
         });
-
-        // Update Product functionality
-        let btnUpdateProduct = document.getElementById("btnUpdateProduct");
-        btnUpdateProduct.addEventListener("click", async function() {
-            let searchName = document.getElementById("inpSearchName").value;
-            let category2=document.getElementById("inpNewProductcategory").value
-            let newProductDesc = document.getElementById("inpNewProductDesc").value;
-            let newProductPrice = document.getElementById("inpNewProductPrice").value;
-            let quantity=document.getElementById("inpnewStockQuantity").value;
-
-            if (!searchName) {
-                alert("Please enter a product name to update.");
+        
+        function readFileAsBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = (error) => reject(error);
+                reader.readAsDataURL(file);
+            });
+        }
+        
+        document.getElementById("btnUpdateProduct").addEventListener("click", async () => {
+            const searchName = document.getElementById("inpSearchName").value.trim();
+            const newDesc = document.getElementById("inpNewProductDesc").value.trim();
+            const newCategory = document.getElementById("inpNewProductcategory").value.trim();
+            const newPrice = document.getElementById("inpNewProductPrice").value.trim();
+            const newItems = document.getElementById("inpnewStockQuantity").value.trim();
+        
+            if (!searchName || !newDesc || !newPrice) {
+                alert("Please fill all fields.");
                 return;
             }
-
-            if (!newProductDesc || !newProductPrice) {
-                alert("All fields must be filled for the update.");
-                return;
-            }
-
+        
             try {
                 const q = query(collection(db, "servdetails"), where("name", "==", searchName));
                 const querySnapshot = await getDocs(q);
-                
+        
                 if (querySnapshot.empty) {
-                    alert("No product found with that name.");
+                    alert("No product found.");
                     return;
                 }
-
-                querySnapshot.forEach(async (doc) => {
-                    const productDocRef = doc.ref;
-                    await updateDoc(productDocRef, {
-                        1: newProductDesc,
-                        2: newProductPrice,
-                        3:searchName,
-                        4:category2
+        
+                for (let docSnap of querySnapshot.docs) {
+                    await updateDoc(docSnap.ref, {
+                        description: newDesc,
+                        category: newCategory,
+                        price: Number(newPrice),
+                        items: newItems
                     });
-                });
-
+                }
+        
                 alert("Product updated successfully!");
-            } catch (e) {
+            } catch (error) {
+                console.error("Update error:", error);
                 alert("Error updating product.");
             }
         });
-
-        // Delete Product functionality
-        let btnDeleteProduct = document.getElementById("btnDeleteProduct");
-        btnDeleteProduct.addEventListener("click", async function() {
-            let deleteName = document.getElementById("inpDeleteName").value;
-
+        
+        document.getElementById("btnDeleteProduct").addEventListener("click", async () => {
+            const deleteName = document.getElementById("inpDeleteName").value.trim();
             if (!deleteName) {
                 alert("Please enter a product name to delete.");
                 return;
             }
-
+        
             try {
                 const q = query(collection(db, "servdetails"), where("name", "==", deleteName));
                 const querySnapshot = await getDocs(q);
-
+        
                 if (querySnapshot.empty) {
-                    alert("No product found with that name.");
+                    alert("No product found.");
                     return;
                 }
-
-                querySnapshot.forEach(async (doc) => {
-                    const productDocRef = doc.ref;
-                    await deleteDoc(productDocRef);
-                });
-
+        
+                for (let docSnap of querySnapshot.docs) {
+                    await deleteDoc(docSnap.ref);
+                }
+        
                 alert("Product deleted successfully!");
-            } catch (e) {
+            } catch (error) {
+                console.error("Delete error:", error);
                 alert("Error deleting product.");
             }
         });
-
-    </script>
+        </script>
+        
 </body>
 </html>
