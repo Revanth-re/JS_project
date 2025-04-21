@@ -1,145 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7fc;
-            margin: 0;
-            padding: 0;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        h2 {
-            text-align: center;
-            color: #333;
-            margin-top: 20px;
-        }
+    html {
+      font-size: 16px; /* 1rem = 16px */
+    }
 
-        .container {
-            max-width: 400px;
-            margin: 50px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f7fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
 
-        input[type="email"], input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
+    .container {
+      width: 100%;
+      max-width: 25rem; /* ~400px */
+      background: #fff;
+      padding: 2rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
 
-        button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            font-size: 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+    h2 {
+      text-align: center;
+      margin-bottom: 1.25rem;
+      color: #333;
+      font-size: 1.5rem;
+    }
 
-        button:hover {
-            background-color: #45a049;
-        }
+    input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 0.75rem;
+      margin: 0.625rem 0;
+      border: 1px solid #ccc;
+      border-radius: 0.375rem;
+      font-size: 1rem;
+    }
 
-        .alert {
-            padding: 10px;
-            margin-top: 20px;
-            background-color: #f44336;
-            color: white;
-            text-align: center;
-            border-radius: 4px;
-        }
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 1rem;
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      border-radius: 0.375rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
 
-    </style>
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .alert {
+      padding: 0.625rem;
+      margin-top: 1.25rem;
+      background-color: #f44336;
+      color: white;
+      text-align: center;
+      border-radius: 0.375rem;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 480px) {
+      html {
+        font-size: 14px;
+      }
+
+      .container {
+        padding: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <h2>Login</h2>
+  <div class="container">
+    <h2>Login</h2>
+    <input type="email" id="loginEmail" placeholder="Email" required />
+    <input type="password" id="loginPassword" placeholder="Password" required />
+    <button id="btn3">Login</button>
+    <a href="Register.html"> Create An account ? Register</a>
+  </div>
 
-        <!-- Login Form -->
-        <input type="email" id="loginEmail" placeholder="Email" required />
-        <input type="password" id="loginPassword" placeholder="Password" required />
-        <button id="btn3" onclick="func3()">Login</button>
-    </div>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword ,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword ,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-       
-        // const firebaseConfig = {
-        //   apiKey: "AIzaSyAedJTjKGzpLIAiGGIMQ95cCgS5PhnqgXU",
-        //   authDomain: "regi-48730.firebaseapp.com",
-        //   projectId: "regi-48730",
-        //   storageBucket: "regi-48730.firebasestorage.app",
-        //   messagingSenderId: "740494806021",
-        //   appId: "1:740494806021:web:eead9969344e5038e1e06c"
-        // };
-        const firebaseConfig = {
-            apiKey: "AIzaSyCV1eiwKVZs1inaWkVTYVsisI3sIIlAGL0",
-            authDomain: "crud-dd0b4.firebaseapp.com",
-            projectId: "crud-dd0b4",
-            storageBucket: "crud-dd0b4.firebasestorage.app",
-            messagingSenderId: "818921146981",
-            appId: "1:818921146981:web:dbbdba5635bcdf78d3548c"
-        };
+    const firebaseConfig = {
+      apiKey: "AIzaSyCV1eiwKVZs1inaWkVTYVsisI3sIIlAGL0",
+      authDomain: "crud-dd0b4.firebaseapp.com",
+      projectId: "crud-dd0b4",
+      storageBucket: "crud-dd0b4.appspot.com",
+      messagingSenderId: "818921146981",
+      appId: "1:818921146981:web:dbbdba5635bcdf78d3548c"
+    };
 
-      
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app)
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-        let btn3 = document.getElementById("btn3").addEventListener("click", func3);
+    document.getElementById("btn3").addEventListener("click", func3);
 
-        function func3() {
-            const login = document.getElementById("loginEmail").value;
-            const loginPassword = document.getElementById("loginPassword").value;
-            console.log(login, loginPassword);
-            
-            signInWithEmailAndPassword(auth, login, loginPassword)
-            .then((userCredential) => {
-                // Logged in 
-                const user = userCredential.user;
-                console.log(user);
-                
-                alert("Login successful!");
-                window.location.href = "mainn.html";  // Redirect to main page after successful login
-            })
-            .catch((error) => {
-                alert("Login failed");
-            });
-        }
-        onAuthStateChanged(auth, user => {
-            const loginLink = document.getElementById("loginLink");
-            if (user) {
-                // Change logo to display user name or email
-                // document.getElementById("logo").innerHTML = `<a href="#">${user.displayName || user.email}</a>`;
-                
-            
-                // alert("logged in")
-                
-                // loginLink.onclick = () => {
-                    // window.location.href = 'index.html';
-                // };
-            } else {
-                console.log("logged out");
-                
-              
-            }
+    function func3() {
+      const login = document.getElementById("loginEmail").value;
+      const loginPassword = document.getElementById("loginPassword").value;
+
+      signInWithEmailAndPassword(auth, login, loginPassword)
+        .then((userCredential) => {
+          alert("Login successful!");
+          window.location.href = "mainn.html";
+        })
+        .catch((error) => {
+          alert("Login failed");
         });
-    </script>  
+    }
 
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        console.log("User logged in");
+      } else {
+        console.log("User logged out");
+      }
+    });
+  </script>
 </body>
 </html>

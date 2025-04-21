@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Responsive Premium Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
@@ -240,6 +241,7 @@ top: 0%;
   /* margin-top: 10%; */
 }
 
+
 .product-card button:hover {
   background-color: #218838;
 }
@@ -250,41 +252,50 @@ top: 0%;
   #productList,
   #productList2 {
     grid-template-columns: 1fr;
+    /* display: flex; */
     padding: 15px;
     gap: 15px;
   }
 
   .product-card {
+
+    display: grid;
+    grid-template-columns: auto auto;
     padding: 6%;
     text-align: center;
   }
 
   .product-card h3 {
-    font-size: 1.1rem;
+    font-size:1.2rem;
+    font-weight: 700;
   }
 
   .product-card p {
-    font-size: 0.9rem;
+    font-size: 0.7rem;
+    font-weight: 400;
   }
 #modal{
-  width: 90vw;
+  width: 30vw;
 
 }
   .product-card img {
-    width: 80vw;
-    height: 40vh;
+    width: 40vw;
+    height: 20vh;
   }
 
   .product-card button {
-    width: 100%;
-    font-size: 1rem;
-    padding: 12px;
+    width: 40vw;
+    height: 5vh;
+    font-size: 0.6rem;
+    padding: 0px !important;
   }
 
   .product-card a {
     display: block;
+    width: 40vw;
+    height: 5vh;
     margin-top: 10px;
-    font-size: 0.95rem;
+    font-size: 0.6rem;
   }
 
 
@@ -315,6 +326,7 @@ top: 0%;
         color: black;
         margin-top: 2%;
     }
+ 
     body{
       background-color: #f3f0f0;
     }
@@ -415,6 +427,7 @@ border: 2px solid rgba(245, 241, 241, 0.18);
   flex-direction: column;
   cursor: pointer;
 }
+#categoryButtons{text-align: center;}
 
 .bar {
   height: 3px;
@@ -458,10 +471,7 @@ border: 2px solid rgba(245, 241, 241, 0.18);
   /* margin-right: 50%; */
 }
 }
-#id{
-  height: 80vh;
-width: 60vw;
-}
+
 #car_div{
   margin-bottom: 10%;
       background: rgba(9, 9, 9, 0.3);
@@ -488,6 +498,11 @@ border: 2px solid rgba(245, 241, 241, 0.18);
   /* margin-bottom: 3%; */
   width:8vw;
 }
+#id
+{
+height: 90vh;  
+}
+
     @media (max-width: 768px) {
   .nav-links {
     position: absolute;
@@ -514,22 +529,71 @@ border: 2px solid rgba(245, 241, 241, 0.18);
 
   }
   #anchor{
-  margin-left: 0.5%;
+  /* margin-left: 30%; */
   /* margin-bottom: 3%; */
-  width:80vw;
-  /* padding: 20%; */
+  width:8vw;
+  padding: 2.5%;
+  color: white;
+  /* height: 10vh; */
+} 
+
+
+ 
+#anchor{
+  margin-left: 10%;
+  /* margin-bottom: 3%; */
+  width:30vw;
+  text-align: center;
+  /* padding: 2%; */
+  /* height: 10vh; */
+} 
+#Bookbtn{
+  width: 30vw;
+}
+#categoryButtons{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  overflow-x: auto;
+margin:2%;
+/* width: 100%; */
+/* height: 8vh; */
+}
+#categoryButtons button{
+  width: 28vw;
+  /* height: 15vh; */
+  padding: 2%;
+}
+#id
+{
+height: 50vh;  
+}
+#categoryButton{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  overflow-x: auto;
+margin:2%;
+/* width: 100%; */
+/* height: 8vh; */
+}
+#categoryButton button{
+  width: 28vw;
+  /* height: 15vh; */
+  padding: 2%;
 }
 
-  #id{
-  height: 50vh;
-/* width: 60vw; */
-}}
+}
+#showmore{
+  text-align: center;
+  padding: 1%;
+}
+
 
 /* #anchor{
   margin-left: 30%;
   margin-bottom: 3%;
   width:8vw;
 } */
+
   </style>
 </head>
 
@@ -599,7 +663,7 @@ border: 2px solid rgba(245, 241, 241, 0.18);
 
   <section class="mb-5">
     <h2 style="margin-top: 5%;" class="text-center mb-4">Explore by Category</h2>
-    <div  id="categoryButtons" class="d-flex flex-wrap justify-content-center gap-3">
+    <div  id="categoryButtons" class="justify-content-center gap-3">
       <button class="btn btn-dark category-btns" data-category="all">All</button>
       <button class="btn btn-outline-dark category-btns" data-category="marriage">Marriage</button>
       <button class="btn btn-outline-dark category-btns" data-category="anniversary">Anniversary</button>
@@ -628,7 +692,7 @@ border: 2px solid rgba(245, 241, 241, 0.18);
 
     <!-- Category Buttons -->
     <h2 class="text-center mb-4">Explore by Category </h2>
-    <div id="categoryButton" class="d-flex flex-wrap justify-content-center gap-3">
+    <div id="categoryButton" class="justify-content-center gap-3">
       <button class="btn btn-dark category2-btn" data-category="all">All</button>
       <button class="btn btn-outline-dark category2-btn" data-category="marriage">Marriage</button>
       <button class="btn btn-outline-dark category2-btn" data-category="anniversary">Anniversary</button>
@@ -652,7 +716,10 @@ border: 2px solid rgba(245, 241, 241, 0.18);
         <div class="cards" id="cardsContainer">
           <!-- JS will populate cards -->
         </div>
+        <div id="sec3"></div>
+        <!-- <button  id="showMoreBtn2">Showmore</button> -->
       </div>
+
      
   <!-- Footer -->
   <footer style="background: #1e1e1e; color: white; padding: 40px 20px; margin-top: 60px;">

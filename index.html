@@ -45,9 +45,9 @@
     /* Banner */
     .banner {
       position: relative;
-      width: 100%;
-      height: 100vh;
-      background: linear-gradient(135deg, rgba(0,0,0,0), rgba(0,0,0,0)), url('buffet2.jpg') center/cover no-repeat;
+      width: 100vw;
+      height: 50vh;
+      background: linear-gradient(135deg, rgba(0,0,0,0), rgba(0,0,0,0)), url() center/cover no-repeat;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -233,7 +233,12 @@ height:50vh;
   </nav>
 
   <!-- Banner -->
-  <header class="banner">
+  <header class="banner" style="background-color: rgb(255, 255, 255);">
+<div>
+  <div style="padding:10%; background-color: #000000; border-radius: 10px;">
+  <p style="font-size: 2rem; color: white;">Choose our Best Catering Services Around Us </p>
+  </div>
+</div>
     <!-- <div class="login-buttons">
       <p style="color:white;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, voluptate officia.</p>
       <button class="btn btn-primary" onclick="location.href='Register.html'">User Login</button>
