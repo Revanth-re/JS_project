@@ -42,7 +42,7 @@
       width: 100%;
       padding: 0.9em;
       margin-top: 1em;
-      background-color: #4CAF50;
+      background-color: #6bced9;
       border: none;
       color: white;
       font-size: 0.95em;
@@ -52,7 +52,7 @@
     }
 
     button:hover {
-      background-color: #45a049;
+      background-color: #6e706e;
     }
 
     .google-btn {
@@ -95,6 +95,37 @@
       margin-top: 1em;
       display: none;
     }
+    #a{
+text-decoration: none;
+font-size: 1rem;
+color: white;
+margin-bottom: 2%;
+width: 100%;
+background-color: #6bced9;
+
+    }
+    #a{
+      background-color: #fdc656;
+      color: white;
+      font-size: 0.95em;
+      border-radius: 0.4em;
+      padding: 10px;
+      width: 95%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 1.2em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+@media (max-width:768px) {
+  
+  input{
+    width: 80vw;
+    margin-right: 5%;
+  }
+}
   </style>
 </head>
 <body>
@@ -108,6 +139,7 @@
       <input type="email" id="signupEmail" placeholder="Email" required />
       <input type="password" id="signupPassword" placeholder="Password" required />
       <button id="btn1">Sign Up</button>
+    <a id="a" href="mainn.html">Guest</a>
       <a href="login.html">Already have an account? Login</a>
     </div>
 
@@ -155,7 +187,7 @@
         };
 
         localStorage.setItem("userdetails", JSON.stringify([userDetails]));
-        window.location.href = "mainn.html";
+      
       } else {
         console.log("User not logged in");
       }

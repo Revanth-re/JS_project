@@ -12,7 +12,7 @@
     }
 
     html {
-      font-size: 16px; /* 1rem = 16px */
+      font-size: 16px;
     }
 
     body {
@@ -27,7 +27,7 @@
 
     .container {
       width: 100%;
-      max-width: 25rem; /* ~400px */
+      max-width: 25rem;
       background: #fff;
       padding: 2rem;
       border-radius: 0.75rem;
@@ -37,7 +37,7 @@
 
     h2 {
       text-align: center;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
       color: #333;
       font-size: 1.5rem;
     }
@@ -55,7 +55,7 @@
       width: 100%;
       padding: 0.75rem;
       margin-top: 1rem;
-      background-color: #4CAF50;
+      background-color: #fdc656;;
       border: none;
       color: white;
       font-size: 1rem;
@@ -68,14 +68,17 @@
       background-color: #45a049;
     }
 
-    .alert {
-      padding: 0.625rem;
-      margin-top: 1.25rem;
-      background-color: #f44336;
-      color: white;
+    .register-link {
+      display: block;
       text-align: center;
-      border-radius: 0.375rem;
-      font-size: 1rem;
+      margin-top: 1rem;
+      color: #4CAF50;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .register-link:hover {
+      text-decoration: underline;
     }
 
     @media (max-width: 480px) {
@@ -89,20 +92,21 @@
     }
   </style>
 </head>
-<body>
 
+<body>
   <div class="container">
     <h2>Login</h2>
     <input type="email" id="loginEmail" placeholder="Email" required />
     <input type="password" id="loginPassword" placeholder="Password" required />
-    <button id="btn3">Login</button>
-    <a href="Register.html"> Create An account ? Register</a>
+    <button id="btnLogin">Login</button>
+    <a href="Register.html" class="register-link">Create an account? Register</a>
   </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword ,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
+    // Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyCV1eiwKVZs1inaWkVTYVsisI3sIIlAGL0",
       authDomain: "crud-dd0b4.firebaseapp.com",
@@ -112,30 +116,38 @@
       appId: "1:818921146981:web:dbbdba5635bcdf78d3548c"
     };
 
+    // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    document.getElementById("btn3").addEventListener("click", func3);
+    // Login button listener
+    document.getElementById("btnLogin").addEventListener("click", async (e) => {
+      e.preventDefault();
 
-    function func3() {
-      const login = document.getElementById("loginEmail").value;
-      const loginPassword = document.getElementById("loginPassword").value;
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value.trim();
 
-      signInWithEmailAndPassword(auth, login, loginPassword)
-        .then((userCredential) => {
-          alert("Login successful!");
-          window.location.href = "mainn.html";
-        })
-        .catch((error) => {
-          alert("Login failed");
-        });
-    }
+      if (email === "" || password === "") {
+        alert("Please fill in both email and password.");
+        return;
+      }
 
-    onAuthStateChanged(auth, user => {
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        alert("Login successful!");
+        window.location.href = "mainn.html"; // Redirect after login
+      } catch (error) {
+        console.error(error.code, error.message);
+        alert(error.message); // Show exact Firebase error
+      }
+    });
+
+    // Optional: Listen to authentication state changes
+    onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log("User logged in");
+        console.log("User is logged in:", user.email);
       } else {
-        console.log("User logged out");
+        console.log("User is logged out");
       }
     });
   </script>

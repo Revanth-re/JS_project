@@ -147,28 +147,17 @@
             <div class="logo">
                 <a href="index.html">MyLogo</a>
             </div>
-            <div class="hamburger" id="hamburger">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-            <ul class="nav-links">
-                <li><a href="your_services.html">Your-posts</a></li>
-                <li><a href="#">Payments</a></li>
-                <li><a href="#">Discounts</a></li>
-                <li><a href="#">Help</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
+          
         </nav>
     </header>
 
     <main class="form-container">
-        <input type="text" placeholder="Enter Cater Name" id="inpProductName">
-        <input type="text" placeholder="Enter Category (e.g., veg, nonveg)" id="inpProductDesc">
-        <input type="number" placeholder="Enter Price Per Head" id="inpProductPrice">
-        <input type="text" placeholder="Type of Function" id="inpProductCategory">
+        <input type="text" placeholder="Enter-your-Name" id="inpProductName">
+        <input type="text" placeholder="Enter-Required-Day" id="inpProductDesc">
+        <input type="number" placeholder="Enter Payage" id="inpProductPrice">
+        <input type="number" placeholder="Enter-Boys-Count" id="inpProductCategory">
         <input type="text" placeholder="Enter timings" id="inpStockQuantity">
-        <input type="file" placeholder="Enter Org Image URL" id="inpProductImage">
+        <!-- <input type="file" placeholder="Enter Org Image URL" id="inpProductImage"> -->
         <input type="text" placeholder="Location or area" id="location">
         <input type="number" placeholder="Enter Contact Number" id="number">
         <button id="btnAddProduct">Add Product</button>
@@ -218,27 +207,21 @@
 
             const contactNumber = document.getElementById("number").value.trim();
             const fileInput = document.getElementById("inpProductImage");
-            const file = fileInput.files[0];
-        
-            if (!productName || !productDesc || !productPrice || !productCategory || !stockQuantity || !contactNumber || !file) {
-                alert("Please fill all fields and upload an image.");
-                return;
-            }
-        
+         
             try {
-                const base64 = await readFileAsBase64(file);
+             
                 await addDoc(collection(db, "servdetails"), {
                     name: productName,
                     functionType: productDesc,
                     price: Number(productPrice),
                     description: productCategory,
                     items: stockQuantity,
-                    imageUrl: base64,
+                   
                     contact: contactNumber,
                     location:location
                 });
                 alert("Product added successfully!");
-                fileInput.value = ""; // reset file input
+            
             } catch (error) {
                 console.error("Error adding product:", error);
                 alert("Error adding product.");

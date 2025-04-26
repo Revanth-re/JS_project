@@ -249,7 +249,7 @@ async function serv_Pro() {
     productName.textContent = data.name;
 
     const productPrice = document.createElement("p");
-    productPrice.textContent = `Price: ₹${data.price}`;
+    productPrice.textContent = `Payage: ₹${data.price}`;
     productPrice.style.fontWeight = "600";
     productPrice.style.color = "black";
 
@@ -257,7 +257,7 @@ async function serv_Pro() {
     productDesc.textContent = `Function type: ${data.functionType}`;
 
     const productCategoryy = document.createElement("p");
-    productCategoryy.textContent = `Category: ${data.description}`;
+    productCategoryy.textContent = `Advance-Amount:-: ${data.description}`;
 
     const productStock = document.createElement("p");
     productStock.textContent = `Timings: ${data.items}`;
@@ -273,21 +273,21 @@ async function serv_Pro() {
     productImage.src = data.imageUrl;
     productImage.alt = data.name;
     productImage.style.borderRadius = "8px";
-
+    productImage.setAttribute("id","pro-img")
     const num = document.createElement("p");
     num.textContent = `Contact: ${data.contact}`;
-    num.style.color = "blue";
-    num.style.fontWeight = "700";
-
+   
+num.style.color="blue"
     const anchor = document.createElement("a");
     anchor.innerText = "Call us";
     anchor.href = "tel:" + data.contact;
     anchor.className = "btn btn-primary mt-2";
-    anchor.setAttribute("id", "anchor");
-    anchor.style.color = "white";
+    anchor.setAttribute("id", "anchor1");
+    // anchor.style.color = "white";
 
     const button = document.createElement("button");
     button.innerText = "Book Now";
+      button.setAttribute("id", "anchor2");
     button.className = "btn btn-success mt-2 Bookbtn";
     button.setAttribute("data-bs-toggle", "modal");
     button.setAttribute("data-bs-target", "#bookingModal");
@@ -295,16 +295,14 @@ async function serv_Pro() {
       const modalDetails = document.getElementById("modalDetails");
       modalDetails.innerHTML = `
         <div class="row">
-          <div class="col-md-6">
-            <img src="${data.imageUrl}" class="img-fluid rounded" alt="${data.name}">
-          </div>
+         
           <div class="col-md-6">
             <h4>${data.name}</h4>
-            <p><strong>Price:</strong> ₹${data.price}</p>
+            <p><strong>Payage:</strong> ₹${data.price}</p>
             <p><strong>Location:</strong> ${data.location}</p>
             <p><strong>Category:</strong> ${data.functionType}</p>
             <p><strong>Function Type:</strong> ${data.description}</p>
-            <p><strong>Items:</strong> ${data.items}</p>
+               <p><strong>Advance-Amount:</strong> ${data.Category}</p>
             <p><strong>Contact:</strong> ${data.contact}</p>
             <button class="btn btn-success mt-3" id="confirmBtns">Confirm Booking</button>
           </div>
@@ -315,7 +313,7 @@ async function serv_Pro() {
       });
     });
 
-    leftdiv.append(productName, productPrice, productStock, location, productDesc, productCategoryy, num);
+    leftdiv.append(productName, productPrice, productStock, location, productDesc,productCategoryy , num);
     productCard.append(leftdiv, button, anchor);
 
     FullCards.push(productCard); // Store for later rendering
@@ -536,7 +534,9 @@ async function fetchAllProducts() {
 
     const button = document.createElement("button");
     button.innerText = "Book Now";
+   
     button.className = "btn btn-success mt-2";
+    button.setAttribute("id", "anchors");
     button.setAttribute("data-bs-toggle", "modal");
     button.setAttribute("data-bs-target", "#bookingModal");
 

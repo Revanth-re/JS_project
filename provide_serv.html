@@ -93,7 +93,10 @@
       .hamburger {
         display: flex;
       }
+      input {
+        width: 90vw;}
     }
+
     input {
       width: 50vw;
       padding: 1rem;
@@ -101,6 +104,7 @@
       border-radius: 0.5rem;
       border: 1px solid #ccc;
       font-size: 1rem;
+      text-align: center;
     }
     button {
       background-color: #4CAF50;
@@ -117,6 +121,32 @@
     button:hover {
       background-color: #45a049;
     }
+
+    
+    @media (max-width: 768px) {
+      .nav-links {
+        flex-direction: column;
+        display: none;
+        width: 100%;
+        margin-top: 1rem;
+        padding: 0;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .nav-links li {
+        margin: 1rem 0;
+        text-align: center;
+      }
+      .hamburger {
+        display: flex;
+      }
+      input {
+        width: 90vw;
+      }
+    }
+
+
   </style>
 </head>
 <body>
@@ -142,7 +172,7 @@
   <input type="text" placeholder="Type of Functions" id="inpProductCategory">
   <input type="text" placeholder="Enter Items" id="inpStockQuantity">
   <input type="text" placeholder="location" id="info">
-  
+  <!-- <input type="number" placeholder="Enter Advance-Amount You Need" id="inpProductCategory"> -->
   <input type="number" placeholder="Enter Contact Number" id="cell">
   <input type="file" id="inpProductImage">
   <button id="btnAddProduct">Add Product</button>
