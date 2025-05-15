@@ -254,11 +254,11 @@ async function serv_Pro() {
     productPrice.style.color = "black";
 
     const productDesc = document.createElement("p");
-    productDesc.textContent = `Function type: ${data.functionType}`;
+    productDesc.textContent = `Category: ${data.functionType}`;
 
-    const productCategoryy = document.createElement("p");
-    productCategoryy.textContent = `Advance-Amount:-: ${data.description}`;
-
+    const productBoys = document.createElement("p");
+    productBoys.textContent = `Required-Boys:- ${data.description}`;
+productBoys.style.fontWeight="600"
     const productStock = document.createElement("p");
     productStock.textContent = `Timings: ${data.items}`;
     productStock.style.fontWeight = "600";
@@ -313,7 +313,7 @@ num.style.color="blue"
       });
     });
 
-    leftdiv.append(productName, productPrice, productStock, location, productDesc,productCategoryy , num);
+    leftdiv.append(productName, productPrice, productStock, location, productDesc,productBoys , num);
     productCard.append(leftdiv, button, anchor);
 
     FullCards.push(productCard); // Store for later rendering
@@ -496,6 +496,7 @@ async function fetchAllProducts() {
     productImage.src = data.image;
     productImage.alt = data.name;
     productImage.style.borderRadius = "8px";
+    productImage.setAttribute("id","fetch-images")
 
     const leftdiv = document.createElement("div");
     leftdiv.classList.add("leftdiv");
@@ -541,7 +542,25 @@ async function fetchAllProducts() {
     button.setAttribute("data-bs-target", "#bookingModal");
 
     button.addEventListener("click", function () {
+      // doc.data()
+      // const arr=[]
+      // const object1={
+      // name: doc.data().name,
+      //   price:doc.data().price,
+
+      //   location:doc.data().location,
+      //   productdesc:doc.data,
+      //   // productImg:productImage
+
+
+      // }
+       
+      // console.log(doc.data())
+      // arr.push(object1)
+
+      
       const modalDetails = document.getElementById("modalDetails");
+     
       modalDetails.innerHTML = `
         <div class="row">
           <div class="col-md-6">
@@ -555,6 +574,7 @@ async function fetchAllProducts() {
             <p><strong>Description:</strong> ${data.description}</p>
             <p><strong>Items:</strong> ${data.items}</p>
             <p><strong>Contact:</strong> ${data.cell}</p>
+          <p><strong>Advance-Amount:</strong>${"Rs:1000"}</p>
             <button class="btn btn-success mt-3" id="confirmBtns">Confirm Booking</button>
           </div>
         </div>
@@ -562,6 +582,10 @@ async function fetchAllProducts() {
 
       document.getElementById("confirmBtns").addEventListener("click", function () {
         window.confirmBooking(data);
+      //  document.getElementById("confirmBtns").addEventListener("click", function () {
+  // Create a new booking object
+// });
+
       });
     });
 
@@ -616,7 +640,7 @@ window.confirmBooking = function (data) {
   modalDetails.innerHTML = `
     <div class="text-center">
       <h4>Pay for: ${data.name}</h4>
-      <p>Total Amount: ₹${data.price}</p>
+      <p>Advance-Amount: ₹${"1000"}</p>
     </div>
     <form id="cardForm" class="mt-3">
       <div class="form-group mb-2">
@@ -638,6 +662,7 @@ window.confirmBooking = function (data) {
   `;
 
   const cardForm = document.getElementById("cardForm");
+
   cardForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -663,7 +688,27 @@ window.confirmBooking = function (data) {
     
     },2000)
   })
+  console.log(data);
   
+  let newBooking = {
+    name: data.name,
+    Advance: data.price,
+    location: data.info,
+    image: data.image,
+    category: data.category,
+    Cell:data.cell
+  };
+
+  // Get existing bookings or empty array
+  let existingBookings = JSON.parse(localStorage.getItem("YourBookings")) || [];
+
+  // Add new booking
+  existingBookings.push(newBooking);
+
+  // Save updated bookings to localStorage
+  localStorage.setItem("YourBookings", JSON.stringify(existingBookings));
+
+  console.log("Updated Bookings:", existingBookings);
 }
 function initCategoryFilter() {
   const buttons = document.querySelectorAll(".category-btns");
