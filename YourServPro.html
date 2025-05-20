@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Bookings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Navbar */
+    nav {
+      background-color: black;
+      padding: 10px 20px;
+      color: white;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar button {
+      background-color: white;
+      color: black;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .navbar button:hover {
+      background-color: #ddd;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    /* Booking grid */
+    #div {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 0 20px 40px;
+    }
+
+    .booking {
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    button.remove-btn {
+      margin-top: 15px;
+      padding: 8px 16px;
+      background-color: crimson;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button.remove-btn:hover {
+      background-color: darkred;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar with Back Button -->
+  <nav class="navbar">
+              <button style="padding: 0.5%; width: 5vw; color: white; background-color: rgb(13, 12, 12); border-radius: 5px;" onclick="javascript:history.back()" class="back-button"><i class="fa-solid fa-arrow-left"></i></button>
+
+  </nav>
+
+  <h1>Your Bookings</h1>
+  <div id="div"></div>
+
+  <script>
+    let data = JSON.parse(localStorage.getItem("ServBookings")) || [];
+    const div = document.getElementById("div");
+
+    function renderBooking() {
+      if (data.length === 0) {
+        div.innerHTML = "<p style='text-align:center; width: 100%;'>No bookings found.</p>";
+        return;
+      }
+
+      div.innerHTML = data.map((item, index) => `
+        <div class="booking">
+          <strong>Name:</strong> ${item.name} <br>
+          <strong>ID:</strong> ${item.Advance || "N/A"} <br>
+          <strong>Cell:</strong> ${item.Cell || "N/A"} <br>
+          <strong>Location:</strong> ${item.location || item.id} <br>
+          <strong>Category:</strong> ${item.category || "N/A"} <br>
+        
+          <button class="remove-btn" onclick="removeBooking(${index})">Remove Booking</button>
+        </div>
+      `).join('');
+    }
+
+    function removeBooking(index) {
+      data.splice(index, 1);
+      localStorage.setItem("ServBookings", JSON.stringify(data));
+      renderBooking();
+    }
+
+    renderBooking();
+  </script>
+</body>
+</html>

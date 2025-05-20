@@ -5,159 +5,246 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Form</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+           * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7fc;
-            padding: 2rem;
-            font-size: 1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f7fc;
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-        header {
-            width: 100%;
-            text-align: center;
-            margin-bottom: 3rem;
-        }
+    header {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
 
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #333;
-            padding: 1rem 2rem;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-        }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #333;
+      padding: 1rem 2rem;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+    }
 
-        .logo a {
-            color: white;
-            font-size: 2rem;
-            text-decoration: none;
-        }
+    .logo a {
+      color: white;
+      font-size: 2rem;
+      text-decoration: none;
+    }
 
-        .nav-links {
-            list-style: none;
-            display: flex;
-        }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+    }
 
-        .nav-links li {
-            margin: 0 1rem;
-        }
+    .nav-links li {
+      margin: 0 1rem;
+    }
 
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 1rem;
-            padding: 0.5rem;
-            transition: background-color 0.3s ease;
-        }
+    .nav-links a {
+      color: rgb(245, 242, 242);
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 0.5rem;
+      transition: background-color 0.3s ease;
+    }
 
-        .nav-links a:hover {
-            background-color: #575757;
-            border-radius: 0.5rem;
-        }
+    .nav-links a:hover {
+      background-color: #575757;
+      border-radius: 0.5rem;
+    }
 
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            flex-direction: column;
-            gap: 4px;
-            width: 30px;
-            height: 25px;
-            position: absolute;
-            right: 1rem;
-            top: 1rem;
-        }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      width: 30px;
+      height: 25px;
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      cursor: pointer;
+    }
 
-        .hamburger div {
-            background-color: white;
-            height: 4px;
-            width: 100%;
-            transition: all 0.3s ease;
-        }
+    .hamburger div {
+      background-color: white;
+      height: 4px;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
 
-        @media (max-width: 768px) {
-            .nav-links {
-                flex-direction: column;
-                display: none;
-                width: 100%;
-                margin-top: 1rem;
-            }
+    .admin-banner-premium {
+      min-height: 100vh;
+      background: linear-gradient(to bottom right, #1f1c2c, #928dab),
+                  url('https://images.unsplash.com/photo-1555243896-c709bfa0b564?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+      position: relative;
+      overflow: hidden;
+      padding: 4rem 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
 
-            .nav-links.active {
-                display: flex;
-            }
+    #sectionCenter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      width: 100%;
+    }
 
-            .nav-links li {
-                margin: 1rem 0;
-                text-align: center;
-            }
+    #AdminInp {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 350px;
+      width: 100%;
+      backdrop-filter: blur(10px);
+    }
 
-            .hamburger {
-                display: flex;
-            }
-        }
+    #AdminInp h2 {
+      color: white;
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+    }
 
-        input, button {
-            width: 50vw;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            box-sizing: border-box;
-        }
+    input, button {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
 
-        input {
-            border: 1px solid #ccc;
-        }
+    input {
+      border: 1px solid #ccc;
+      text-align: center;
+    }
 
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+    button {
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
 
-        button:hover {
-            background-color: #45a049;
-        }
+    button:hover {
+      background-color: #45a049;
+    }
 
-        .form-container {
-            width: 100%;
-            max-width: 600px;
-            text-align: left;
-        }
+    #btnDeleteProduct {
+      background-color: red;
+    }
+
+    #btnUpdateProduct {
+      background-color: blue;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        flex-direction: column;
+        display: none;
+        width: 100%;
+        margin-top: 1rem;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links li {
+        margin: 1rem 0;
+        text-align: center;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      body {
+        padding: 1rem;
+      }
+
+      .navbar {
+        flex-wrap: wrap;
+        padding: 1rem;
+      }
+
+      #sectionCenter {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #AdminInp {
+        width: 100%;
+        max-width: 95%;
+      }
+    }@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 1rem;
+    background-color:white;
+    padding: 3rem;
+    border-radius: 0.5rem;
+    width: auto;
+    z-index: 1000;
+    margin-top: -2%;
+   margin-right: -5%;
+  }
+  .nav-links.active {
+    display: flex;
+  }
+  .nav-links li {
+    margin: 1.3rem 0;
+    text-align: right;
+    color: black;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .nav-links li a{
+font-size: 1.3rem;
+  }
+
+}
+
     </style>
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div class="logo">
-                <a href="index.html">MyLogo</a>
+                <a href="provide_serv.html">MyLogo</a>
             </div>
           
         </nav>
     </header>
 
-    <main class="form-container">
+    <!-- <main class="form-container">
         <input type="text" placeholder="Enter-your-Name" id="inpProductName">
         <input type="text" placeholder="Enter-Required-Day" id="inpProductDesc">
         <input type="number" placeholder="Enter Payage" id="inpProductPrice">
         <input type="number" placeholder="Enter-Boys-Count" id="inpProductCategory">
         <input type="text" placeholder="Enter timings" id="inpStockQuantity">
-        <!-- <input type="file" placeholder="Enter Org Image URL" id="inpProductImage"> -->
         <input type="text" placeholder="Location or area" id="location">
         <input type="number" placeholder="Enter Contact Number" id="number">
         <button id="btnAddProduct">Add Product</button>
@@ -171,7 +258,37 @@
 
         <input type="text" placeholder="Enter Cater Name to Delete" id="inpDeleteName">
         <button id="btnDeleteProduct">Delete Product</button>
-    </main>
+    </main> -->
+    
+  <section id="sectionCenter" class="admin-banner-premium">
+    <div id="AdminInp">
+      <input type="text" placeholder="Enter-your-Name" id="inpProductName">
+        <input type="text" placeholder="Enter-Required-Day" id="inpProductDesc">
+        <input type="number" placeholder="Enter Payage" id="inpProductPrice">
+        <input type="number" placeholder="Enter-Boys-Count" id="inpProductCategory">
+        <input type="text" placeholder="Enter timings" id="inpStockQuantity">
+        <input type="text" placeholder="Location or area" id="location">
+        <input type="number" placeholder="Enter Contact Number" id="number">
+        <button id="btnAddProduct">Add Product</button>
+    </div>
+
+    <div id="AdminInp">
+      <h2>Update Your CaterService Details</h2>
+    <input type="text" placeholder="Update - Enter Cater Name" id="inpSearchName">
+        <input type="text" placeholder="Enter New Description" id="inpNewProductDesc">
+        <input type="text" placeholder="Enter New Category" id="inpNewProductcategory">
+        <input type="number" placeholder="Enter New Price" id="inpNewProductPrice">
+        <input type="text" placeholder="Enter new timings" id="inpnewStockQuantity">
+        <button id="btnUpdateProduct">Update Product</button>
+    </div>
+
+    <div id="AdminInp">
+      <h2>Delete Your CaterService Details</h2>
+     
+        <input type="text" placeholder="Enter Cater Name to Delete" id="inpDeleteName">
+        <button id="btnDeleteProduct">Delete Product</button>
+    </div>
+  </section>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";

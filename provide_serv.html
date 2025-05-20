@@ -10,20 +10,23 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       font-family: Arial, sans-serif;
       background-color: #f4f7fc;
-      padding: 2rem;
+      padding: 2rem 1rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
     }
+
     header {
       width: 100%;
       text-align: center;
       margin-bottom: 2rem;
     }
+
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -35,32 +38,38 @@
       margin: 0 auto;
       position: relative;
     }
+
     .logo a {
       color: white;
       font-size: 2rem;
       text-decoration: none;
     }
+
     .nav-links {
       list-style: none;
       display: flex;
+      flex-wrap: wrap;
     }
+
     .nav-links li {
       margin: 0 1rem;
     }
+
     .nav-links a {
-      color: white;
+      color: rgb(245, 242, 242);
       text-decoration: none;
       font-size: 1rem;
       padding: 0.5rem;
       transition: background-color 0.3s ease;
     }
+
     .nav-links a:hover {
       background-color: #575757;
       border-radius: 0.5rem;
     }
+
     .hamburger {
       display: none;
-      cursor: pointer;
       flex-direction: column;
       gap: 4px;
       width: 30px;
@@ -68,119 +77,154 @@
       position: absolute;
       right: 1rem;
       top: 1rem;
+      cursor: pointer;
     }
+
     .hamburger div {
       background-color: white;
       height: 4px;
       width: 100%;
       transition: all 0.3s ease;
     }
-    @media (max-width: 768px) {
-      .nav-links {
-        flex-direction: column;
-        display: none;
-        width: 100%;
-        margin-top: 1rem;
-        padding: 0;
-      }
-      .nav-links.active {
-        display: flex;
-      }
-      .nav-links li {
-        margin: 1rem 0;
-        text-align: center;
-      }
-      .hamburger {
-        display: flex;
-      }
-      input {
-        width: 90vw;}
+
+    .admin-banner-premium {
+      min-height: 100vh;
+      background: linear-gradient(to bottom right, #1f1c2c, #928dab),
+                  url('https://images.unsplash.com/photo-1555243896-c709bfa0b564?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+      position: relative;
+      overflow: hidden;
+      padding: 4rem 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    #sectionCenter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      width: 100%;
+    }
+
+    #AdminInp {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 350px;
+      width: 100%;
+      backdrop-filter: blur(10px);
+    }
+
+    #AdminInp h2 {
+      color: white;
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border-radius: 0.5rem;
+      font-size: 1rem;
     }
 
     input {
-      width: 50vw;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-      border-radius: 0.5rem;
       border: 1px solid #ccc;
-      font-size: 1rem;
       text-align: center;
     }
+
     button {
+      border: none;
       background-color: #4CAF50;
       color: white;
-      border: none;
-      padding: 1rem;
-      border-radius: 0.5rem;
       cursor: pointer;
       transition: background-color 0.3s ease;
-      width: 50vw;
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
     }
+
     button:hover {
       background-color: #45a049;
     }
 
-    
+    #btnDeleteProduct {
+      background-color: red;
+    }
+
+    #btnUpdateProduct {
+      background-color: blue;
+    }
+
     @media (max-width: 768px) {
       .nav-links {
         flex-direction: column;
         display: none;
         width: 100%;
         margin-top: 1rem;
-        padding: 0;
       }
+
       .nav-links.active {
         display: flex;
       }
+
       .nav-links li {
         margin: 1rem 0;
         text-align: center;
       }
+
       .hamburger {
         display: flex;
       }
-      input {
-        width: 90vw;
+
+      body {
+        padding: 1rem;
       }
-    }
-    .admin-banner-premium {
-  min-height: 100vh;
-  background: linear-gradient(to bottom right, #1f1c2c, #928dab),
-              url('https://images.unsplash.com/photo-1555243896-c709bfa0b564?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
-  position: relative;
-  overflow: hidden;
-  padding: 4rem 1rem;
-}
 
-.admin-banner-content {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 1rem;
-  max-width: 700px;
-  width: 100%;
-  backdrop-filter: blur(10px);
-}
+      .navbar {
+        flex-wrap: wrap;
+        padding: 1rem;
+      }
 
-.admin-banner-content h1,
-.admin-banner-content p {
-  color: #ffffff;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-}
+      #sectionCenter {
+        flex-direction: column;
+        align-items: center;
+      }
 
-.admin-banner-premium .btn {
-  font-weight: 500;
-  transition: all 0.3s ease-in-out;
-}
+      #AdminInp {
+        width: 100%;
+        max-width: 95%;
+      }
+    }@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 1rem;
+    background-color:white;
+    padding: 3rem;
+    border-radius: 0.5rem;
+    width: auto;
+    z-index: 1000;
+    margin-top: -2%;
+   margin-right: -5%;
+  }
+  .nav-links.active {
+    display: flex;
+  }
+  .nav-links li {
+    margin: 1.3rem 0;
+    text-align: right;
+    color: black;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .nav-links li a{
+font-size: 1.3rem;
+  }
 
-.admin-banner-premium .btn:hover {
-  background-color: #ffffff;
-  color: #1f1c2c;
-  transform: translateY(-2px);
-}
-#sectionCenter{
-  text-align: center;
 }
 
   </style>
@@ -197,33 +241,41 @@
         <li><a href="serv_boys.html">Add service</a></li>
         <li><a href="items/help.html">Help</a></li>
         <li><a href="items/contact.html">Contact</a></li>
-        <li><a href="AdminProfile.html">profile</a></li>
+        <li><a href="AdminProfile.html">Profile</a></li>
       </ul>
     </nav>
   </header>
-  <section id="sectionCenter" class="admin-banner-premium d-flex align-items-center justify-content-center text-center text-white">
- 
-  
-  <input type="text" placeholder="Enter Name of Org" id="inpProductName">
-  <input type="text" placeholder="Enter Category" id="inpProductDesc">
-  <input type="number" placeholder="Enter Price Per Head" id="inpProductPrice">
-  <input type="text" placeholder="Type of Functions" id="inpProductCategory">
-  <input type="text" placeholder="Enter Items" id="inpStockQuantity">
-  <input type="text" placeholder="location" id="info">
-  <!-- <input type="number" placeholder="Enter Advance-Amount You Need" id="inpProductCategory"> -->
-  <input type="number" placeholder="Enter Contact Number" id="cell">
-  <!-- <input type="file" id="inpProductImage"> -->
-  <button id="btnAddProduct">Add Product</button>
 
-  <input type="text" placeholder="Update Your Org" id="inpSearchName">
-  <input type="text" placeholder="Enter New Description" id="inpNewProductDesc">
-  <input type="text" placeholder="Enter New Category" id="inpNewProductcategory">
-  <input type="number" placeholder="Enter New Price" id="inpNewProductPrice">
-  <input type="number" placeholder="Enter New Stock" id="inpnewStockQuantity">
-  <button id="btnUpdateProduct">Update Product</button>
+  <section id="sectionCenter" class="admin-banner-premium">
+    <div id="AdminInp">
+      <h2>Add Your CaterService Details</h2>
+      <input type="text" placeholder="Enter Name of Org" id="inpProductName">
+      <input type="text" placeholder="Enter Category" id="inpProductDesc">
+      <input type="number" placeholder="Enter Price Per Head" id="inpProductPrice">
+      <input type="text" placeholder="Type of Functions" id="inpProductCategory">
+      <input type="text" placeholder="Enter Items" id="inpStockQuantity">
+      <input type="text" placeholder="Location" id="info">
+      <input type="number" placeholder="Enter Contact Number" id="cell">
+      <input type="file" id="inpProductImage">
+      <button id="btnAddProduct">Add Product</button>
+    </div>
 
-  <input type="text" placeholder="Enter Product Name to Delete" id="inpDeleteName">
-  <button id="btnDeleteProduct">Delete Product</button>
+    <div id="AdminInp">
+      <h2>Update Your CaterService Details</h2>
+      <input type="text" placeholder="Update Your Org" id="inpSearchName">
+      <input type="text" placeholder="Enter New Description" id="inpNewProductDesc">
+      <input type="text" placeholder="Enter New Category" id="inpNewProductcategory">
+      <input type="number" placeholder="Enter New Price" id="inpNewProductPrice">
+      <input type="number" placeholder="Enter New Stock" id="inpnewStockQuantity">
+      <button id="btnUpdateProduct">Update Product</button>
+    </div>
+
+    <div id="AdminInp">
+      <h2>Delete Your CaterService Details</h2>
+      <input type="text" placeholder="Enter Product Name to Delete" id="inpDeleteName">
+      <button id="btnDeleteProduct">Delete Product</button>
+    </div>
+  </section>
 
   <script type="module">
     const hamburger = document.getElementById("hamburger");
@@ -234,7 +286,7 @@
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
     import { getFirestore, collection, addDoc, query, where, getDocs, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+    import { getAuth } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCV1eiwKVZs1inaWkVTYVsisI3sIIlAGL0",
@@ -249,7 +301,7 @@
     const db = getFirestore(app);
     const auth = getAuth(app);
 
-    const currentAdminEmail = "admin@example.com"; // Replace with actual admin logic
+    const currentAdminEmail = "admin@example.com";
     const arr = JSON.parse(localStorage.getItem("Caters")) || [];
 
     function readFileAsBase64(file) {
@@ -274,9 +326,9 @@
       const cell = document.getElementById("cell").value;
       const imageFile = document.getElementById("inpProductImage").files[0];
 
-    //   if (!name || !desc || !price || !category || !stock || !imageFile) {
-    //     return alert("Please fill all fields.");
-    //   }
+      if (!name || !desc || !price || !category || !stock || !imageFile) {
+        return alert("Please fill all fields.");
+      }
 
       const base64Image = await readFileAsBase64(imageFile);
       const productData = {

@@ -378,7 +378,7 @@ window.confirmBookingss = function (data) {
     const modalDetails = document.getElementById("modalDetails");
     modalDetails.innerHTML = `
       <div class="text-center">
-        <h4>Pay for: ${data.name}</h4>
+        <h4>Amount you get from: ${data.name}</h4>
         <p>Total Amount: ₹${data.price}</p>
       </div>
       <form id="cardForm" class="mt-3">
@@ -399,6 +399,25 @@ window.confirmBookingss = function (data) {
         <button type="submit" class="btn btn-success w-100 mt-2">Book</button>
       </form>
     `;
+let newBooking = {
+    name: data.name,
+    Advance: data.price,
+    location: data.info,
+    // image: data.image,
+    category: data.category,
+    Cell:data.cell
+  };
+
+  // Get existing bookings or empty array
+  let existingBookings = JSON.parse(localStorage.getItem("ServBookings")) || [];
+
+  // Add new booking
+  existingBookings.push(newBooking);
+
+  // Save updated bookings to localStorage
+  localStorage.setItem("ServBookings", JSON.stringify(existingBookings));
+
+  console.log("Updated Bookings:", existingBookings);
 
     const cardForm = document.getElementById("cardForm");
   cardForm.addEventListener("submit", function (e) {
