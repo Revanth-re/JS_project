@@ -89,7 +89,10 @@
 
   <script>
     let data = JSON.parse(localStorage.getItem("ServBookings")) || [];
+    console.log(data);
+    
     const div = document.getElementById("div");
+    
 
     function renderBooking() {
       if (data.length === 0) {
@@ -98,12 +101,14 @@
       }
 
       div.innerHTML = data.map((item, index) => `
+    
         <div class="booking">
           <strong>Name:</strong> ${item.name} <br>
-          <strong>ID:</strong> ${item.Advance || "N/A"} <br>
+          <strong>Amount-You-Get:</strong> ${item.Advance || "N/A"} <br>
           <strong>Cell:</strong> ${item.Cell || "N/A"} <br>
           <strong>Location:</strong> ${item.location || item.id} <br>
-          <strong>Category:</strong> ${item.category || "N/A"} <br>
+          <strong>Timings:</strong> ${item.category || "N/A"} <br>
+           <strong>Required-Boys:</strong> ${item.description|| "N/A"} <br>
         
           <button class="remove-btn" onclick="removeBooking(${index})">Remove Booking</button>
         </div>
@@ -111,9 +116,15 @@
     }
 
     function removeBooking(index) {
-      data.splice(index, 1);
+        const Confirm= confirm("are you sure to remove item")
+      if (Confirm) {
+        data.splice(index, 1);
       localStorage.setItem("ServBookings", JSON.stringify(data));
       renderBooking();
+      } else {
+        
+        alert("you choosed to store the item")
+      }
     }
 
     renderBooking();

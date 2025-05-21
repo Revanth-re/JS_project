@@ -373,8 +373,10 @@ function initSearchLocation2() {
   });
 }
 
-
+// console.log(data);
 window.confirmBookingss = function (data) {
+  
+  
     const modalDetails = document.getElementById("modalDetails");
     modalDetails.innerHTML = `
       <div class="text-center">
@@ -399,14 +401,18 @@ window.confirmBookingss = function (data) {
         <button type="submit" class="btn btn-success w-100 mt-2">Book</button>
       </form>
     `;
-let newBooking = {
+let newBooking = {  
     name: data.name,
     Advance: data.price,
-    location: data.info,
+    location: data.location,
     // image: data.image,
-    category: data.category,
-    Cell:data.cell
+    category: data.items,
+    Cell:data.contact,
+    description:data.description,
+    
+   
   };
+// console.log(data.info);
 
   // Get existing bookings or empty array
   let existingBookings = JSON.parse(localStorage.getItem("ServBookings")) || [];

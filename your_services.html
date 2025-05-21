@@ -161,14 +161,7 @@
 
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="logo">
-            <a href="provide_serv.html">MyLogo</a>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
+      <button id="btn" onclick="backed()" style="background-color: #575757; padding: 10px; width: 7vw; color: white;">Back</button>
         <div class="hamburger" id="hamburger">
             <div></div>
             <div></div>
@@ -183,6 +176,12 @@
     </div>
 
     <script>
+        const btn=document.getElementById("btn").addEventListener("click", backed())
+function backed(){
+    console.log("hello");
+    
+    window.history.back()
+}
         // Hamburger Menu Toggle
         const hamburger = document.getElementById("hamburger");
         const navLinks = document.querySelector(".nav-links");
