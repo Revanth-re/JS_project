@@ -682,7 +682,7 @@ window.confirmBooking = function (data) {
           <input type="text" class="form-control" placeholder="CVV" required>
         </div>
       </div>
-      <button type="submit" class="btn btn-success w-100 mt-2">Pay ₹${data.price}</button>
+      <button type="submit" class="btn btn-success w-100 mt-2">Pay ₹1000</button>
     </form>
   `;
 
